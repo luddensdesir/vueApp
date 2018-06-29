@@ -17,9 +17,12 @@ var users = require('./routes/users');
 // var db = mongoose.connection;
 
 var app = express();
- 
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'app')));
+
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
