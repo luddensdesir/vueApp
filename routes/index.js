@@ -19,6 +19,7 @@ router.get('/order/', function (req, res) {
   res.json({val1: 'this is order'})
 })
 
+//bring up all past orders in side bar. when clicked it should bring all of them 
 router.get('/pastOrders/', function (req, res) {
   res.json({val1: [['item1', 'item3', 'item7', 'item2'],
     ['item1', 'item3', 'item7', 'item2'],
