@@ -12,13 +12,15 @@
     
     <ul class = "cart">
       <li class = "" v-for="item in cartItems"
-        v-bind:key="item.name">{{item.num}}</li>
+        v-bind:key="item.name">{{item.num}}
+        <button v-on:click="removeItem(item)">x</button>
+      </li>
     </ul> 
-
   </div>
 </template>
   
 <script>
+  import{mapActions} from 'vuex'
   export default {
     name: 'Sidebar',
     data(){
@@ -33,6 +35,13 @@
       }
     },
     methods: {
+      
+      removeItem: function(item){
+        this.$store.dispatch('removeFromCart', item)
+      }
+      // ...mapActions([
+      //   'removeItem' //how do i pass objects then?
+      // ])
     },
     created(){
     }

@@ -36,23 +36,26 @@ export const store = new Vuex.Store({
     cart: state => state.cart
   },
   mutations: {
+    removeItem: (state, item) => {
+      state.cart.content.pop(item)
+    },
     addToCart: (state, item) => {
-      console.log(item)
       state.cart.content.push(item)
     },
     changeValue: state => {
       state.cart.content.forEach(item => {
         item.num = item.num + 15
-        console.log(item)
       })
     }
   },
   actions: {
+    removeFromCart: (context, payload) => {
+      context.commit('removeItem', payload)
+    },
     changeValue: (context, payload) => {
       // $http doesn't exist here for some reason
       return Vue.http.get('http://localhost:3000/api/')
         .then(function (response) {
-          console.log('response')
           console.log(response.body)
         })
     }

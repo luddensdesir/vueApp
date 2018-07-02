@@ -6,14 +6,12 @@
     <Sidebar/>
     <Navbar/>
     <Munchies @thingyClicked= "toCart" />
-    <!-- <Center/>-->
   </div >
 </template>
 
 <script>
   import Navbar from './components/Navbar'
   import Sidebar from './components/Sidebar'
-  import Center from './components/Center'
   import Munchies from './components/Munchies'
 
   export default {
@@ -24,7 +22,7 @@
         value: '0',
       };
     },
-    components: { Navbar, Sidebar, Center, Munchies },
+    components: { Navbar, Sidebar, Munchies },
     computed: {
       cart(){
         return this.$store.getters.cart;

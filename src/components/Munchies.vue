@@ -8,7 +8,7 @@
             v-bind:key="tab.name"
             v-bind:class="['item', { active: currentTab.name === tab.name }]"
             v-on:click="currentTab = tab">
-            <div class = "purchase"><div class = "pButton" @click="testClicky($event, tab.name)"><span>Add {{ tab.name }} To Cart</span></div></div>
+            <div class = "purchase"><div class = "pButton" @click="addToCart($event, tab.name)"><span>Add {{ tab.name }} To Cart</span></div></div>
             <div class = "image">
               <img v-bind:src="tab.image"/>
             </div>
@@ -40,10 +40,11 @@
     computed: {
     },
     methods: {
-      testClicky: function($event, var1){
+      addToCart: function($event, var1){
+        var date = new Date();
         var newObj = {
           num: var1,
-          name: 'hello'
+          added: date
         }
         this.$emit('thingyClicked', newObj );
       },
@@ -68,22 +69,14 @@
 
   var tabs = []
 
-  tabs.push(setImages(name1, 1252366))
-  tabs.push(setImages(name2, 85345))
-  tabs.push(setImages(name3, 152325))
-  tabs.push(setImages(name4, 42412))
-  tabs.push(setImages(name5, 1515))
-  tabs.push(setImages(name6, 151313))
-  tabs.push(setImages(name7, 551))
-  tabs.push(setImages(name8, 5))
-  // tabs.push(setImages(name1, 'chicken'))
-  // tabs.push(setImages(name2, 'happy tots'))
-  // tabs.push(setImages(name3, 'churros'))
-  // tabs.push(setImages(name4, 'sandwich'))
-  // tabs.push(setImages(name5, 'morning'))
-  // tabs.push(setImages(name6, 'ficken'))
-  // tabs.push(setImages(name7, 'strips'))
-  // tabs.push(setImages(name8, 'grilledcheese'))
+   tabs.push(setImages(name1, 'chicken'))
+   tabs.push(setImages(name2, 'happy tots'))
+   tabs.push(setImages(name3, 'churros'))
+   tabs.push(setImages(name4, 'sandwich'))
+   tabs.push(setImages(name5, 'morning'))
+   tabs.push(setImages(name6, 'ficken'))
+   tabs.push(setImages(name7, 'strips'))
+   tabs.push(setImages(name8, 'grilledcheese'))
 
 </script>
 
