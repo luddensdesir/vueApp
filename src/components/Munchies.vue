@@ -4,11 +4,15 @@
       <div id = "albumcontainer">
         <div id = "album" >
           <div
-            v-for="tab in tabs"
+            v-for="tab in menuItems"
             v-bind:key="tab.name"
             v-bind:class="['item', { active: currentTab.name === tab.name }]"
             v-on:click="currentTab = tab">
-            <div class = "purchase"><div class = "pButton" @click="addToCart($event, tab.name)"><span>Add {{ tab.name }} To Cart</span></div></div>
+            <div class = "purchase">
+              <div class = "pButton" @click="addToCart($event, tab.name)">
+                <span>Add {{ tab.name }} To Cart {{tab.price}}</span>
+              </div>
+            </div>
             <div class = "image">
               <img v-bind:src="tab.image"/>
             </div>
@@ -20,14 +24,14 @@
 </template>
 
 <script>
-  import name1 from "../assets/1.jpg"
-  import name2 from "../assets/2.jpg"
-  import name3 from "../assets/3.jpg"
-  import name4 from "../assets/4.jpg"
-  import name5 from "../assets/5.jpg"
-  import name6 from "../assets/6.jpg"
-  import name7 from "../assets/7.jpg"
-  import name8 from "../assets/8.jpg"
+  import img1 from "../assets/1.jpg"
+  import img2 from "../assets/2.jpg"
+  import img3 from "../assets/3.jpg"
+  import img4 from "../assets/4.jpg"
+  import img5 from "../assets/5.jpg"
+  import img6 from "../assets/6.jpg"
+  import img7 from "../assets/7.jpg"
+  import img8 from "../assets/8.jpg"
 
   export default {
     name: 'Munchies',
@@ -38,6 +42,18 @@
       };
     },
     computed: {
+        menuItems(){
+          var menu = this.$store.getters.menu;
+          // console.log('fucking menuItems')
+          // menu.items.forEach(element => {
+            
+          //   console.log(element)
+          // });
+
+          // console.log(menu.items)
+
+          return menu.items;
+        }
     },
     methods: {
       addToCart: function($event, var1){
@@ -49,11 +65,15 @@
         this.$emit('thingyClicked', newObj );
       },
       updateVal: function(){
+        // console.log('updateVal')
         this.$store.commit('changeValue')
-        console.log('updateVal')
       }
     },
     created(){
+      this.$http.get('http://localhost:3000/api/menu')
+        .then(function(response){
+          this.$store.commit('updateAllPrices', response.body)
+        }); 
     }
   }
 
@@ -69,14 +89,14 @@
 
   var tabs = []
 
-   tabs.push(setImages(name1, 'chicken'))
-   tabs.push(setImages(name2, 'happy tots'))
-   tabs.push(setImages(name3, 'churros'))
-   tabs.push(setImages(name4, 'sandwich'))
-   tabs.push(setImages(name5, 'morning'))
-   tabs.push(setImages(name6, 'ficken'))
-   tabs.push(setImages(name7, 'strips'))
-   tabs.push(setImages(name8, 'grilledcheese'))
+   tabs.push(setImages(img1, 'chicken'))
+   tabs.push(setImages(img2, 'happy tots'))
+   tabs.push(setImages(img3, 'churros'))
+   tabs.push(setImages(img4, 'sandwich'))
+   tabs.push(setImages(img5, 'morning'))
+   tabs.push(setImages(img6, 'ficken'))
+   tabs.push(setImages(img7, 'strips'))
+   tabs.push(setImages(img8, 'grilledcheese'))
 
 </script>
 

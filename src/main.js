@@ -16,6 +16,9 @@ export const store = new Vuex.Store({
     cart: {
       content: []
     },
+    menu: {
+      items: {}
+    },
     center: {
       content: '',
       allPhotos: [],
@@ -32,7 +35,7 @@ export const store = new Vuex.Store({
     }
   },
   getters: {
-    center: state => state.center,
+    menu: state => state.menu,
     cart: state => state.cart
   },
   mutations: {
@@ -46,6 +49,9 @@ export const store = new Vuex.Store({
       state.cart.content.forEach(item => {
         item.num = item.num + 15
       })
+    },
+    updateAllPrices: (state, items) => {
+      state.menu.items = items
     }
   },
   actions: {
@@ -56,7 +62,7 @@ export const store = new Vuex.Store({
       // $http doesn't exist here for some reason
       return Vue.http.get('http://localhost:3000/api/')
         .then(function (response) {
-          console.log(response.body)
+          // console.log(response.body)
         })
     }
   }
