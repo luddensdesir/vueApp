@@ -14,10 +14,11 @@ Vue.use(vueRresource)
 export const store = new Vuex.Store({
   state: {
     cart: {
+      total: 0,
       content: []
     },
     menu: {
-      items: {}
+      items: []
     },
     center: {
       content: '',
@@ -41,9 +42,11 @@ export const store = new Vuex.Store({
   mutations: {
     removeItem: (state, item) => {
       state.cart.content.pop(item)
+      state.cart.total -= item.price
     },
     addToCart: (state, item) => {
       state.cart.content.push(item)
+      state.cart.total += item.price
     },
     changeValue: state => {
       state.cart.content.forEach(item => {

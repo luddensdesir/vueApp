@@ -19,6 +19,7 @@
     
     <ul class = "cart">
       <li>{{cartItems.length}}</li>
+      <li>{{total}}</li>
       <!-- <li><a class = "cart" v-for="item in cartItems"
         v-bind:key="item.name">{{item.num}}</a>
       </li> -->
@@ -42,6 +43,9 @@
     computed:{
       cartItems(){
         return this.$store.getters.cart.content;
+      },
+      total(){
+        return this.$store.getters.cart.total;
       }
     },
     methods: {
@@ -121,7 +125,8 @@ ul{
 }
 
 #nav li{
-  display:inline;
+  list-style: none;
+  /* display:inline; */
 }
 
 #nav {

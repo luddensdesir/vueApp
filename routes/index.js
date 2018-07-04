@@ -2,19 +2,23 @@ var express = require('express')
 var router = express.Router()
 
 function getMenuItems () {
-  function newItem (name, price) {
-    return {name, price}
+  function newItem (name, price, image = '') {
+    return {
+      name,
+      price,
+      image
+    }
   }
 
-  return {
-    happyTots: newItem('Happy Tots', 2.50),
-    churros: newItem('Churros', 2.50),
-    burger: newItem('Burger', 2.50),
-    morningBun: newItem('Morning Bun', 2.50),
-    chickenSandwich: newItem('Chicken Sandwich', 2.50),
-    strips: newItem('Chicken Strips', 2.50),
-    grilledcheese: newItem('grilledCheese', 2.50)
-  }
+  return [
+    newItem('Happy Tots', 2.50),
+    newItem('Churros', 2.20),
+    newItem('Burger', 12.25),
+    newItem('Morning Bun', 11.10),
+    newItem('Chicken Sandwich', 10.75),
+    newItem('Chicken Strips', 7.50),
+    newItem('grilledCheese', 10.20)
+  ]
 }
 
 router.get('/', function (req, res) {
@@ -34,7 +38,6 @@ router.get('/popular/', function (req, res) {
 router.get('/order/', function (req, res) {
   res.json({val1: 'this is order'})
 })
-
 
 // tabs.push(setImages(name1, 'chicken'))
 // tabs.push(setImages(name2, 'happy tots'))

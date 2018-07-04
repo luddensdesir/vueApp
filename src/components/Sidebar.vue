@@ -12,7 +12,7 @@
     
     <ul class = "cart">
       <li class = "" v-for="item in cartItems"
-        v-bind:key="item.name">{{item.num}}
+        v-bind:key="item.name">{{item.name}} + {{ item.price }}
         <button v-on:click="removeItem(item)">x</button>
       </li>
     </ul> 
@@ -31,7 +31,9 @@
     },
     computed:{
       cartItems(){
-        return this.$store.getters.cart.content;
+        var content = this.$store.getters.cart.content;
+        console.log(content)
+        return content
       }
     },
     methods: {

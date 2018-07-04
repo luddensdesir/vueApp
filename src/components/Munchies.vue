@@ -9,8 +9,8 @@
             v-bind:class="['item', { active: currentTab.name === tab.name }]"
             v-on:click="currentTab = tab">
             <div class = "purchase">
-              <div class = "pButton" @click="addToCart($event, tab.name)">
-                <span>Add {{ tab.name }} To Cart {{tab.price}}</span>
+              <div class = "pButton" @click="addToCart($event, tab)">
+                <span>Add {{ tab.name }} To Cart, For{{tab.price}}</span>
               </div>
             </div>
             <div class = "image">
@@ -43,26 +43,20 @@
     },
     computed: {
         menuItems(){
-          var menu = this.$store.getters.menu;
-          // console.log('fucking menuItems')
-          // menu.items.forEach(element => {
-            
-          //   console.log(element)
-          // });
-
-          // console.log(menu.items)
+          var menu = this.$store.getters.menu; 
+          
+          //this is bad. i should feel bad
+          for(var i = 0; i < menu.items.length; i++){
+            menu.items[i].image = tabs[i].image;
+          }
 
           return menu.items;
         }
     },
     methods: {
-      addToCart: function($event, var1){
-        var date = new Date();
-        var newObj = {
-          num: var1,
-          added: date
-        }
-        this.$emit('thingyClicked', newObj );
+      addToCart: function($event, newItem){
+        newItem.date = new Date();
+        this.$emit('itemToCart', newItem );
       },
       updateVal: function(){
         // console.log('updateVal')
@@ -77,12 +71,11 @@
     }
   }
 
+
   function setImages(img, name){
     return{
       name: name, 
-      component: { 
-        template: ''
-      },
+      price: 0,  
       image: img
     }
   }

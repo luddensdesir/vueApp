@@ -5,7 +5,7 @@
     <!--<Slider @sliderAdjusted= "modifyValue($event)" v-bind:position ="sendthis" /></h1> -->
     <Sidebar/>
     <Navbar/>
-    <Munchies @thingyClicked= "toCart" />
+    <Munchies @itemToCart = "toCart" />
   </div >
 </template>
 
