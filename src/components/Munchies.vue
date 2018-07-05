@@ -55,16 +55,16 @@
     },
     methods: {
       addToCart: function($event, newItem){
-        newItem.date = new Date();
+        var date = new Date().getTime();
+        newItem.date = date;
         this.$emit('itemToCart', newItem );
       },
       updateVal: function(){
-        // console.log('updateVal')
         this.$store.commit('changeValue')
       }
     },
     created(){
-      this.$http.get('http://localhost:3000/api/menu')
+      this.$http.get('/api/menu')
         .then(function(response){
           this.$store.commit('updateAllPrices', response.body)
         }); 

@@ -9,8 +9,7 @@
     "ignore": ["dist/", "src/", "app"]
   },
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "server": "node server.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js", 
     "start": "node server.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",

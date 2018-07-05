@@ -11,6 +11,11 @@ Vue.config.productionTip = false
 Vue.use(Vuex)
 Vue.use(vueRresource)
 
+function makePrecise (num) {
+  var factor = Math.pow(10, 0)
+  return Math.round(num * factor) / factor
+}
+
 export const store = new Vuex.Store({
   state: {
     cart: {
@@ -19,20 +24,6 @@ export const store = new Vuex.Store({
     },
     menu: {
       items: []
-    },
-    center: {
-      content: '',
-      allPhotos: [],
-      photos: [],
-      pos: 0,
-      maxLoad: 20,
-      maxImages: 20,
-      // images: function(photos){
-      //   images: function(photos){
-      //   console.log(photos)
-      //   return photos
-      // },
-      value: '0'
     }
   },
   getters: {
@@ -40,13 +31,14 @@ export const store = new Vuex.Store({
     cart: state => state.cart
   },
   mutations: {
-    removeItem: (state, item) => {
-      state.cart.content.pop(item)
-      state.cart.total -= item.price
+    removeItem: (state, params) => {
+      console.log(params.index)
+      state.cart.content.splice(params.index, 1)
+      state.cart.total -= makePrecise(params.item.price)
     },
     addToCart: (state, item) => {
       state.cart.content.push(item)
-      state.cart.total += item.price
+      state.cart.total += makePrecise(item.price)
     },
     changeValue: state => {
       state.cart.content.forEach(item => {
@@ -63,10 +55,10 @@ export const store = new Vuex.Store({
     },
     changeValue: (context, payload) => {
       // $http doesn't exist here for some reason
-      return Vue.http.get('http://localhost:3000/api/')
-        .then(function (response) {
-          // console.log(response.body)
-        })
+      // return Vue.http.get('http://localhost:3000/api/')
+      //   .then(function (response) {
+      //     // console.log(response.body)
+      //   })
     }
   }
 })

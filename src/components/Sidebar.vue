@@ -11,9 +11,10 @@
     </ul>
     
     <ul class = "cart">
-      <li class = "" v-for="item in cartItems"
-        v-bind:key="item.name">{{item.name}} + {{ item.price }}
-        <button v-on:click="removeItem(item)">x</button>
+      <li class = "" 
+        v-for="(item, index) in cartItems"
+        v-bind:key="item.id">{{item.name}} + {{ item.price }}
+        <button v-on:click="removeItem(item, index)">x</button>
       </li>
     </ul> 
   </div>
@@ -32,18 +33,14 @@
     computed:{
       cartItems(){
         var content = this.$store.getters.cart.content;
-        console.log(content)
         return content
       }
     },
     methods: {
-      
-      removeItem: function(item){
-        this.$store.dispatch('removeFromCart', item)
+      removeItem: function(item, index){
+        var args = {item, index}
+        this.$store.dispatch('removeFromCart', args)
       }
-      // ...mapActions([
-      //   'removeItem' //how do i pass objects then?
-      // ])
     },
     created(){
     }
@@ -71,6 +68,12 @@ var tabs = [
   },
   {
     name: 'Order Now',
+    component: {
+      template: '<div>Kart</div>'
+    }
+  },
+  {
+    name: 'Empty Cart',
     component: {
       template: '<div>Kart</div>'
     }

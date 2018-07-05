@@ -29,9 +29,6 @@
       }
     },
     methods: {
-      // modifyValue: function(val){
-      //   this.value = val;
-      // },
       toCart: function(var1){
         this.$store.commit('addToCart', var1)
       }

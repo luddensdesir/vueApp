@@ -2,11 +2,12 @@ var express = require('express')
 var router = express.Router()
 
 function getMenuItems () {
-  function newItem (name, price, image = '') {
+  function newItem (name, price, image = '', date = 0) {
     return {
       name,
       price,
-      image
+      image,
+      date
     }
   }
 
@@ -38,15 +39,6 @@ router.get('/popular/', function (req, res) {
 router.get('/order/', function (req, res) {
   res.json({val1: 'this is order'})
 })
-
-// tabs.push(setImages(name1, 'chicken'))
-// tabs.push(setImages(name2, 'happy tots'))
-// tabs.push(setImages(name3, 'churros'))
-// tabs.push(setImages(name4, 'sandwich'))
-// tabs.push(setImages(name5, 'morning'))
-// tabs.push(setImages(name6, 'chickenSammy'))
-// tabs.push(setImages(name7, 'strips'))
-// tabs.push(setImages(name8, 'grilledcheese'))
 
 // protected routes
 router.get('/menu', function (req, res) {
