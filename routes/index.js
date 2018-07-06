@@ -1,12 +1,17 @@
 var express = require('express')
 var router = express.Router()
 
-function getMenuItems () {
-  function newItem (name, price, image = '', date = 0) {
+var menuItems = setSpecialItems()
+var specialItems = []
+
+function setSpecialItems () {
+  function newItem (name, price, image = '', date = 0, special = false) {
     return {
       name,
       price,
       image,
+      special,
+      // neverSpecial,
       date
     }
   }
@@ -18,8 +23,41 @@ function getMenuItems () {
     newItem('Morning Bun', 11.10),
     newItem('Chicken Sandwich', 10.75),
     newItem('Chicken Strips', 7.50),
-    newItem('grilledCheese', 10.20)
+    newItem('Grilled Cheese', 10.20)
   ]
+}
+
+(function setSpecials () {
+  specialItems = [
+    'Churros',
+    'Burger',
+    'Chicken Sandwich'
+  ]
+  var list = specialItems
+
+  for (var i = 0; i < menuItems.length; i++) {
+    for (var j = 0; j < list.length; j++) {
+      if (menuItems[i].name === list[j]) {
+        menuItems[i].special = true
+        list.splice(j, 1)
+        j--
+      }
+    }
+  }
+})()
+
+function getSpecials () {
+  var specialMenu = []
+  for (var i = 0; i < menuItems.length; i++) {
+    if (menuItems[i].special) {
+      specialMenu.push(menuItems[i])
+    }
+  }
+  return specialMenu
+}
+
+function getMenuItems () {
+  return menuItems
 }
 
 router.get('/', function (req, res) {
@@ -38,6 +76,11 @@ router.get('/popular/', function (req, res) {
 // protected routes
 router.get('/order/', function (req, res) {
   res.json({val1: 'this is order'})
+})
+
+// protected routes
+router.get('/specials', function (req, res) {
+  res.json(getSpecials())
 })
 
 // protected routes

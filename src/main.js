@@ -22,6 +22,10 @@ export const store = new Vuex.Store({
       total: 0,
       content: []
     },
+    specials:{
+        meals: [],
+        items: []
+    },
     menu: {
       items: []
     }
@@ -47,9 +51,20 @@ export const store = new Vuex.Store({
     },
     updateAllPrices: (state, items) => {
       state.menu.items = items
+    },
+    updateSpecials: (state, items) => {
+      state.specials = items
     }
   },
   actions: {
+    retrieveSpecialist: (context, payload) => {
+      return Vue.http.get('http://localhost:3000/api/specials')
+      // return Vue.http.get('/api/specials')
+        .then(function (response) {
+          console.log(response.body)
+          context.commit('updateSpecials', payload)
+        })
+    },
     removeFromCart: (context, payload) => {
       context.commit('removeItem', payload)
     },

@@ -6,7 +6,8 @@
         v-for="tab in tabs"
         v-bind:key="tab.name"
         v-bind:class="['tab-button', { active: currentTab.name === tab.name }]"
-        v-on:click="currentTab = tab">{{ tab.name }}
+        v-on:click ="getSpecialMenu" 
+        >{{ tab.name }}
       </button>
     </ul>
     
@@ -36,7 +37,11 @@
         return content
       }
     },
-    methods: {
+    methods: {  
+      getSpecialMenu: function(){
+        console.log("retrieveSpecialist")
+          this.$store.dispatch('retrieveSpecialist')
+      },
       removeItem: function(item, index){
         var args = {item, index}
         this.$store.dispatch('removeFromCart', args)
@@ -51,7 +56,7 @@ var tabs = [
   {
     name: 'Specials',
     component: {
-      template: '<div>Delivery</div>'
+      template: '<div >Delivery</div>'
     }
   },
   {
