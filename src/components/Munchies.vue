@@ -64,7 +64,7 @@
       }
     },
     created(){
-      this.$http.get('/api/menu')
+      this.$http.get('http://localhost:3000/api/menu')
       // this.$http.get('/api/menu')
         .then(function(response){
           this.$store.commit('updateAllPrices', response.body)

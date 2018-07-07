@@ -7,27 +7,24 @@
       <li v-on:click="changeValue" ><a>Location</a></li>
       <li v-on:click="changeValue" class = "signin" ><a>Sign In</a></li>
     </ul>-->
-
     <ul>
+
       <button
         v-for="tab in tabs"
         v-bind:key="tab.name"
         v-bind:class="['', { active: currentTab.name === tab.name }]"
-        v-on:click="currentTab = tab">{{ tab.name }}
+        v-on:click ="retrieveMap">{{ tab.name }}
       </button>
     </ul>
     
     <ul class = "cart">
       <li>{{cartItems.length}}</li>
       <li>{{total}}</li>
-      <!-- <li><a class = "cart" v-for="item in cartItems"
-        v-bind:key="item.name">{{item.num}}</a>
-      </li> -->
     </ul> 
-
 
   </div>
 </template>
+        // v-on:click="currentTab = tab">{{ tab.name }}
 
 <script>
   import{mapActions} from 'vuex'
@@ -50,7 +47,8 @@
     },
     methods: {
       ...mapActions([
-        'changeValue'
+        // 'retrieveMenu'
+        'retrieveMap'
       ])
     },
     created(){

@@ -23,8 +23,8 @@ export const store = new Vuex.Store({
       content: []
     },
     specials:{
-        meals: [],
-        items: []
+      meals: [],
+      items: []
     },
     menu: {
       items: []
@@ -57,6 +57,35 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
+    retrieveMap: (context, payload) => {
+      return Vue.http.get('api/getmap')
+        .then(function (response) {
+          console.log('getMap')
+          console.log(response.body)
+          // context.commit('updateSpecials', payload)
+        })
+    },
+    retrieveMenu: (context, payload) => {
+      return Vue.http.get('http://localhost:3000/api/menu')
+        .then(function (response) {
+          console.log(response.body)
+          context.commit('updateSpecials', payload)
+        })
+    },
+    retrievePastOrders: (context, payload) => {
+      return Vue.http.get('http://localhost:3000/api/pastorders')
+        .then(function (response) {
+          console.log(response.body)
+          context.commit('updateSpecials', payload)
+        })
+    },
+    retrievePopularOrders: (context, payload) => {
+      return Vue.http.get('http://localhost:3000/api/popular')
+        .then(function (response) {
+          console.log(response.body)
+          context.commit('updateSpecials', payload)
+        })
+    },
     retrieveSpecialist: (context, payload) => {
       return Vue.http.get('http://localhost:3000/api/specials')
       // return Vue.http.get('/api/specials')

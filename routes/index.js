@@ -1,5 +1,38 @@
 var express = require('express')
+var GMaps = require('googlemaps')
 var router = express.Router()
+
+var publicConfig = {
+  key: process.env.gMapsApi,
+  stagger_time: 1000, // for elevationPath
+  encode_polylines: false,
+  secure: false // use https
+  // proxy: 'http://127.0.0.1:3000' // optional, set a proxy for HTTP requests
+}
+
+var gmAPI = new GMaps(publicConfig)
+
+// geocode API
+var geocodeParams = {
+  'address': '121, Curtain Road, EC2A 3AD, London UK',
+  'components': 'components=country:GB',
+  'bounds': '55,-1|54,1',
+  'language': 'en',
+  'region': 'uk'
+} 
+
+// reverse geocode API //user won't need to put a dropper on the map, since you need their actual address
+// var reverseGeocodeParams = {
+//   'latlng': '51.1245,-0.0523',
+//   'result_type': 'postal_code',
+//   'language': 'en',
+//   'location_type': 'APPROXIMATE'
+// }
+
+// gmAPI.reverseGeocode(reverseGeocodeParams, function (err, result) {
+//  console.log('reverseGeocode')
+//  console.log(result)
+// })
 
 var menuItems = setSpecialItems()
 var specialItems = []
@@ -53,16 +86,30 @@ function getSpecials () {
       specialMenu.push(menuItems[i])
     }
   }
+  console.log('get specials')
   return specialMenu
 }
 
 function getMenuItems () {
+  console.log('get menu items')
   return menuItems
 }
 
 router.get('/', function (req, res) {
   console.log('this is index')
   res.json({val1: 'this is index'})
+})
+
+router.get('/getmap/', function (req, res) {
+
+  gmAPI.geocode(geocodeParams, function (err, result) {
+    if (err != null) {
+      console.log('ERROR')
+      console.log(err)
+    }
+    console.log(result)
+    res.json(result)
+  })
 })
 
 router.get('/signin/', function (req, res) {
