@@ -59,45 +59,24 @@
 var tabs = [
   {
     name: 'Menu',
-    component: {
-      template: '<div>Kart</div>'
-    }
   },
   {
     name: 'Location',
-    component: {
-      template: '<div>About</div>'
-    }
   },
   {
     name: 'Payment',
-    component: {
-      template: '<div>About</div>'
-    }
   },
   {
     name: 'Address',
-    component: {
-      template: '<div>About</div>'
-    }
   },
   {
     name: 'Contact',
-    component: {
-      template: '<div>About</div>'
-    }
   },
   {
     name: 'Order Now',
-    component: {
-      template: '<div>About</div>'
-    }
   },
   {
     name: 'Sign In',
-    component: {
-      template: '<div>About</div>'
-    }
   },
 ]
 </script>

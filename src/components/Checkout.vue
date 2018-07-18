@@ -1,6 +1,6 @@
 
 <template>
-  <div id="nav">
+  <div id="checkout">
     <button @click="stripecheckout">SCheckout</button>
     <button @click="ppcheckout">PPCheckout</button>
   </div>
@@ -12,7 +12,7 @@
     name: 'Checkout',
     methods: {
       ppcheckout() {
-        this.$http.post('http://localhost:3000/checkout/paypal')
+        this.$http.post('checkout/paypal')
           .then(function(res){
             var height = 680 + 'px'
             var width = 420 + 'px'
@@ -31,7 +31,7 @@
           currency: 'USD',
           amount: 99999,
           token: (token) => {
-            this.$http.post('http://localhost:3000/checkout/stripe', token)
+            this.$http.post('checkout/stripe', token)
               .then(function(res){
                 console.log(res.body)                
               })  
@@ -50,5 +50,8 @@
  
 </script>
 
-<style> 
+<style>
+  #checkout{
+
+  }
 </style>

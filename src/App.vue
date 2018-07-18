@@ -5,7 +5,8 @@
     <!--<Slider @sliderAdjusted= "modifyValue($event)" v-bind:position ="sendthis" /></h1> -->
     <Sidebar/>
     <Navbar/>
-    <!-- <Checkout/> -->
+    <!-- <Map/> -->
+    <Checkout/>
     <Munchies @itemToCart = "toCart" />
   </div >
 </template>
@@ -15,6 +16,7 @@
   import Sidebar from './components/Sidebar'
   import Munchies from './components/Munchies'
   import Checkout from './components/Checkout'
+  import Map from './components/Map'
 
   export default {
     name: 'App',
@@ -24,7 +26,7 @@
         value: '0',
       };
     },
-    components: { Navbar, Sidebar, Munchies, Checkout },
+    components: { Navbar, Sidebar, Munchies, Checkout, Map},
     computed: {
       cart(){
         return this.$store.getters.cart;

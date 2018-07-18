@@ -51,11 +51,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'app')));
 
-// app.get('/', function(req, res){
-//   res.sendFile(__dirname + '/index.html');
-//  if i'm sending any public keys this is where I do it
-//
-// });
+app.get('/', function(req, res){
+   res.sendFile(__dirname + '/index.html');
+});
 
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {

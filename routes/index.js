@@ -100,12 +100,7 @@ function getMenuItems () {
   return menuItems
 }
 
-router.get('/', function (req, res) {
-  console.log('this is index')
-  res.json({val1: 'this is index'})
-})
-
-router.get('/getmap/', function (req, res) {
+router.get('/getmap', function (req, res) {
 
   gmAPI.geocode(geocodeParams, function (err, result) {
     if (err != null) {
@@ -117,16 +112,16 @@ router.get('/getmap/', function (req, res) {
   })
 })
 
-router.get('/signin/', function (req, res) {
+router.get('/signin', function (req, res) {
   res.json({val1: 'this is signin'})
 })
 
-router.get('/popular/', function (req, res) {
+router.get('/popular', function (req, res) {
   res.json({val1: ['item1', 'item3', 'item7', 'item2']})
 })
 
 // protected routes
-router.get('/order/', function (req, res) {
+router.get('/order', function (req, res) {
   res.json({val1: 'this is order'})
 })
 
