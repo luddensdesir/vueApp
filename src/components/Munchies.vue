@@ -1,6 +1,14 @@
 <template>
-  <keep-alive>
+  <keep-alive> 
     <div id="center">
+      <form id = "submitForm" method="post" v-on:submit.stop.prevent="submitRegistration">
+        <input type="text" maxlength="50" class="rightField" placeholder="[name]" name="name">
+        <input type="text" maxlength="16" class="rightField" placeholder="[username]" name="username">
+        <input type="email"  class="rightField" placeholder="[email]" name="email">
+        <input type="password" maxlength="32" class="rightField" placeholder="[password]" name="password">
+        <input type="password" maxlength="32" class="rightField" placeholder="[password]" name="password2">
+        <button type="Submit" class="button btn btn-default">[submit]</button>
+      </form>
       <div id = "albumcontainer">
         <div id = "album" >
           <div
@@ -54,6 +62,26 @@
         }
     },
     methods: {
+      submitRegistration(el){
+        var targ = el.target
+        var children = targ.children
+        var serialized = ""
+        var formData = {}
+
+        for(var i = 0; i < children.length-1; i++){
+          formData[children[i].name] = children[i].value
+        }
+        
+        console.log(formData)
+        // serialized = JSON.stringify({data: serialized})
+        // console.log(serialized)
+
+        this.$http.post('users/register', formData)
+          .then(function(res){
+            console.log(res)
+          })
+        
+      },
       addToCart: function($event, newItem){
         var date = new Date().getTime();
         newItem.date = date;
@@ -64,7 +92,7 @@
       }
     },
     created(){
-      this.$http.get('http://localhost:3000/api/menu')
+      this.$http.get('menu')
       // this.$http.get('/api/menu')
         .then(function(response){
           this.$store.commit('updateAllPrices', response.body)

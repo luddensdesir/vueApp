@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+var proxy = require('http-proxy-middleware');
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -22,9 +23,17 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    index: '', // specify to enable root proxying
+    host: '...',
+    contentBase: '...',
     proxy: {
       '/api': {
+        context: () => true,
         target: 'http://localhost:3000',
+        changeOrigin: true,
+        pathRewrite: {
+        '^/api': ''
+        },
         secure: false
       }
     },

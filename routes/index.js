@@ -2,8 +2,13 @@ var express = require('express')
 var GMaps = require('googlemaps')
 var router = express.Router()
 
+var apiKey = (process.env.gMapsApi || require('../private').apiKey)
+
+console.log("apiKey")
+console.log(apiKey)
+
 var publicConfig = {
-  key: process.env.gMapsApi,
+  key: apiKey,
   stagger_time: 1000, // for elevationPath
   encode_polylines: false,
   secure: false // use https
@@ -19,7 +24,7 @@ var geocodeParams = {
   'bounds': '55,-1|54,1',
   'language': 'en',
   'region': 'uk'
-} 
+}
 
 // reverse geocode API //user won't need to put a dropper on the map, since you need their actual address
 // var reverseGeocodeParams = {

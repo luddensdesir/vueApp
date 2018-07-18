@@ -6,10 +6,14 @@
   "private": true,
   "main": "server.js",
   "nodemonConfig": {
-    "ignore": ["dist/", "src/", "app"]
+    "ignore": [
+      "dist/",
+      "src/",
+      "app"
+    ]
   },
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js", 
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "node server.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
@@ -17,16 +21,23 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "bcrypt": "*",
+    "body-parser": "*",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
-    "express-validator": "*",
+    "express-validator": "^5.2.0",
+    "gibberish-aes": "^1.0.0",
+    "json-stringify-safe": "^5.0.1",
+    "jsonwebtoken": "*",
     "mongoose": "^5.1.5",
     "passport": "^0.4.0",
-    "body-parser": "*",
     "passport-local": "^1.0.0",
-    "vuex": "*", 
-    "vue-resource": "*", 
-    "vue": "^2.5.2"
+    "paypal-rest-sdk": "^1.8.1",
+    "stripe": "*",
+    "vue": "^2.5.2",
+    "vue-resource": "*",
+    "vue-stripe-checkout": "^1.0.7",
+    "vuex": "*"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

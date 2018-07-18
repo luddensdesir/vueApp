@@ -1,18 +1,29 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import App from './App'
-
 import Vue from 'vue'
 import vueRresource from 'vue-resource'
 import Vuex from 'vuex'
+import VueStripeCheckout from 'vue-stripe-checkout'
+import img8 from './assets/8.jpg'
 
 Vue.config.productionTip = false
 
+const options = {
+  key: 'pk_test_TQvyHRdUxoRorhFQOAHRNVdq',
+  image: img8,
+  locale: 'auto',
+  currency: 'USD',
+  billingAddress: true,
+  panelLabel: 'Subscribe {{amount}}'
+}
+
 Vue.use(Vuex)
 Vue.use(vueRresource)
+Vue.use(VueStripeCheckout, options)
 
 function makePrecise (num) {
-  var factor = Math.pow(10, 0)
+  var factor = Math.pow(10, 1)
   return Math.round(num * factor) / factor
 }
 
@@ -22,7 +33,7 @@ export const store = new Vuex.Store({
       total: 0,
       content: []
     },
-    specials:{
+    specials: {
       meals: [],
       items: []
     },
@@ -66,28 +77,28 @@ export const store = new Vuex.Store({
         })
     },
     retrieveMenu: (context, payload) => {
-      return Vue.http.get('http://localhost:3000/api/menu')
+      return Vue.http.get('api/menu')
         .then(function (response) {
           console.log(response.body)
           context.commit('updateSpecials', payload)
         })
     },
     retrievePastOrders: (context, payload) => {
-      return Vue.http.get('http://localhost:3000/api/pastorders')
+      return Vue.http.get('api/pastorders')
         .then(function (response) {
           console.log(response.body)
           context.commit('updateSpecials', payload)
         })
     },
     retrievePopularOrders: (context, payload) => {
-      return Vue.http.get('http://localhost:3000/api/popular')
+      return Vue.http.get('api/popular')
         .then(function (response) {
           console.log(response.body)
           context.commit('updateSpecials', payload)
         })
     },
     retrieveSpecialist: (context, payload) => {
-      return Vue.http.get('http://localhost:3000/api/specials')
+      return Vue.http.get('api/specials')
       // return Vue.http.get('/api/specials')
         .then(function (response) {
           console.log(response.body)

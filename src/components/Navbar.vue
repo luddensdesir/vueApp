@@ -8,7 +8,6 @@
       <li v-on:click="changeValue" class = "signin" ><a>Sign In</a></li>
     </ul>-->
     <ul>
-
       <button
         v-for="tab in tabs"
         v-bind:key="tab.name"
