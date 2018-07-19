@@ -56,16 +56,14 @@ router.post('/register', function (req, res) {
     })
 
     User.getUserByEmail(email, function (err, user) {
-      if (err) {
-        handler(err)
-      }
+      if (err) { handler(err) }
+
       if (user) {
         console.log('Email ' + email + ' already in use')
       } else {
         User.getUserByUsername(newUsername, function (err, user) {
-          if (err) {
-            handler(err)
-          }
+          if (err) { handler(err) }
+
           if (user) {
             console.log('Username ' + newUsername + ' already in use')
           } else {
@@ -74,6 +72,7 @@ router.post('/register', function (req, res) {
                 throw err
               } else {
                 console.log('User ' + newUsername + ' created')
+                console.log(newToken)
                 res.json({
                   token: newToken,
                   signinSuccess: true
@@ -90,22 +89,73 @@ router.post('/register', function (req, res) {
 })
 
 // passport.use(new LocalStrategy(
-//   function(username, password, done) {
-//    User.getUserByUsername(username, function(err, user){
-//    	if(err) throw err
-//    	if(!user){
-//    		return done(null, false, {message: 'Unknown User'})
-//    	}
+//   function (username, password, done) {
+//     User.getUserByUsername(username, function (err, user) {
+//       if (err) throw err
+//       if (!user) {
+//         return done(null, false, {message: 'Unknown User'})
+//       }
 
-//    	User.comparePassword(password, user.password, function(err, isMatch){
-//    		if(err) throw err
-//    		if(isMatch){
-//    			return done(null, user)
-//    		} else {
-//    			return done(null, false, {message: 'Invalid password'})
-//    		}
-//    	})
-//    })
+//       User.comparePassword(password, user.password, function (err, isMatch) {
+//         if (err) throw err
+//         if (isMatch) {
+//           return done(null, user)
+//         } else {
+//           return done(null, false, {message: 'Invalid password'})
+//         }
+//       })
+//     })
 //   }))
 
+// passport.serializeUser(function (user, done) {
+//   done(null, user.id)
+// })
+
+// passport.deserializeUser(function (id, done) {
+//   User.getUserById(id, function (err, user) {
+//     done(err, user)
+//   })
+// })
+
+router.post('/login',
+  // passport.authenticate('local'),
+  function (req, res) {
+    console.log(req.body)
+    User.getUserByUsername(req.body.username, function (err, user) {
+      if (err) {
+        console.log(user.username + ' login failure.')
+        res.status(404)
+        throw err
+      } else {
+        if (user != null) {
+          encoded = user.username 
+          encoded = AES.enc(encoded, aesPass);
+          var token = jwt.sign({name: encoded}, secret, {
+            expiresIn: '1m'
+          })
+
+          console.log(token)
+
+          user.token = token
+
+          User.updateUserToken(user._id, user.token, function (error){ if(err) {console.log(err)}})
+
+          console.log(user.username + ' login success.')
+          res.render('partials/account', {
+            folders: JSON.stringify(user.folders),
+            user: user._id,
+            username: user.username,
+            token: token
+          })
+        } else {
+          console.log('Invalid user, try logging in')
+          // res.status(403).render('partials/login');
+          res.status(404)
+        }
+      }
+    })
+  })
+
+
+  
 module.exports = router

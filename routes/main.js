@@ -100,8 +100,12 @@ function getMenuItems () {
   return menuItems
 }
 
-router.get('/getmap', function (req, res) {
+router.get('/', function (req, res) {
+  //  res.sendFile(__dirname + '/index.html');
+  res.json({this: "is index"})
+})
 
+router.get('/getmap', function (req, res) {
   gmAPI.geocode(geocodeParams, function (err, result) {
     if (err != null) {
       console.log('ERROR')

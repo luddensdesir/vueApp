@@ -1,13 +1,17 @@
 <template>
   <keep-alive> 
     <div id="center">
-      <form id = "submitForm" method="post" v-on:submit.stop.prevent="submitRegistration">
-        <input type="text" maxlength="50" class="rightField" placeholder="[name]" name="name">
-        <input type="text" maxlength="16" class="rightField" placeholder="[username]" name="username">
-        <input type="email"  class="rightField" placeholder="[email]" name="email">
-        <input type="password" maxlength="32" class="rightField" placeholder="[password]" name="password">
-        <input type="password" maxlength="32" class="rightField" placeholder="[password]" name="password2">
-        <button type="Submit" class="button btn btn-default">[submit]</button>
+      <form id = "loginForm" class ="signinForm" v-on:submit.stop.prevent="login">
+        <input type="text" maxlength="50" class="" placeholder="[login]" name="login">
+        <button type="Submit" class="button btn btn-default">[login]</button>
+      </form>
+      <form id = "submitForm" class ="signinForm" v-on:submit.stop.prevent="submitRegistration">
+        <input type="text" maxlength="50" class="" placeholder="[name]" name="name">
+        <input type="text" maxlength="16" class="" placeholder="[username]" name="username">
+        <input type="email"  class="" placeholder="[email]" name="email">
+        <input type="password" maxlength="32" class="" placeholder="[password]" name="password">
+        <input type="password" maxlength="32" class="" placeholder="[password]" name="password2">
+        <button type="Submit" class="button btn btn-default">[register]</button>
       </form>
       <div id = "albumcontainer">
         <div id = "album" >
@@ -62,10 +66,16 @@
         }
     },
     methods: {
-      submitRegistration(el){
-        var targ = el.target
+      login(ev){
+        var username = { username: ev.target.children[0].value }
+        this.$http.post('users/login', username)
+          .then(function(res){
+            console.log(res)
+          })
+      },
+      submitRegistration(ev){
+        var targ = ev.target
         var children = targ.children
-        var serialized = ""
         var formData = {}
 
         for(var i = 0; i < children.length-1; i++){
@@ -73,8 +83,6 @@
         }
         
         console.log(formData)
-        // serialized = JSON.stringify({data: serialized})
-        // console.log(serialized)
 
         this.$http.post('users/register', formData)
           .then(function(res){
@@ -92,7 +100,7 @@
       }
     },
     created(){
-      this.$http.get('menu')
+      this.$http.get('http://localhost:3000/menu')
       // this.$http.get('/api/menu')
         .then(function(response){
           this.$store.commit('updateAllPrices', response.body)
@@ -288,6 +296,9 @@ body{
           transition: all .5s;  
 }
 
+.signinForm{
+  
+}
 @media(max-width: 640px){
   #center {
     grid-column-start: 1;
