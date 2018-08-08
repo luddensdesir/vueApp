@@ -40,18 +40,11 @@ const User = mongoose.model('User', UserSchema)
 module.exports = User
 
 module.exports.createUser = function (newUser, callback) {
-  // console.log('creating user')
-  // console.log(newUser)
-
   bcrypt.genSalt(10, function (err, salt) {
-    if (err) {
-      handler(err)
-    }
+    if (err) { handler(err) }
 
     bcrypt.hash(newUser.password, salt, function (err, hash) {
-      if (err) {
-        handler(err)
-      }
+      if (err) { handler(err) }
       newUser.password = hash
       newUser.save(callback)
     })
@@ -64,13 +57,11 @@ module.exports.createUser = function (newUser, callback) {
 // }
 
 module.exports.getUserByUsername = function (username, callback) {
-  var query = {username: username}
-  User.findOne(query, callback)
+  User.findOne({username: username}, callback)
 }
 
 // //not sure if either of these are the best way to do it, taking the whole thing and replacing the whole thing, but i dont care right now
 // module.exports.updateUser = function (id, replacement, token, callback) {
-// 	// https://stackoverflow.com/questions/31120111/mongodb-find-and-then-update
 // 	User.update({ 
 //         _id: id,
 //         token: token
@@ -97,42 +88,29 @@ module.exports.getUserByUsername = function (username, callback) {
 // 	// })
 // }
 
-// module.exports.updateUserToken = function (id, replacement, callback) {
-//   // https://stackoverflow.com/questions/31120111/mongodb-find-and-then-update
-//   User.update({
-//     _id: id
-//     // token: token
-//   },
-//   {
-//     '$set': {
-//       token: replacement
-//     }
-//   },
-//   {
-//     'multi': true
-//   },
-//   function (err, doc) {
-//     handler(err)
-//   })
-// }
+module.exports.updateUserToken = function (id, replacement) {
+  console.log('updateUserToken')
+  User.update({
+    _id: id
+  },
+  {
+    '$set': {
+      token: replacement
+    }
+  },
+  {
+    'multi': true
+  },
+  function (err, doc) {
+    if (err) {
+      handler(err)
+    }
+  })
+}
 
-// module.exports.cancelToken = function (id, replacement, token, callback) {
-//   // https://stackoverflow.com/questions/31120111/mongodb-find-and-then-update
-//   User.update({
-//     _id: id,
-//     token: token
-//   },
-//   {
-//     '$set': {
-//       token: replacement
-//     }
-//   },
-//   {
-//     'multi': true
-//   }, function (err, doc) {
-//     handler(err)
-//   })
-// }
+module.exports.updateUserInfo = function (id, replacement, callback) {
+  User.findOneAndUpdate({_id: id}, {$set: {address: replacement.address, name: replacement.name}}, callback)
+}
 
 module.exports.getUserByEmail = function (email, callback) {
   var query = {email: email}
@@ -143,8 +121,8 @@ module.exports.getUserById = function (id, callback) {
   User.findById(id, callback)
 }
 
-module.exports.comparePassword = function (candidatePassword, hash, callback) {
-  bcrypt.compare(candidatePassword, hash, function (err, isMatch) {
+module.exports.comparePassword = function (pass, hash, callback) {
+  bcrypt.compare(pass, hash, function (err, isMatch) {
     if (err) throw err
     callback(null, isMatch)
   })

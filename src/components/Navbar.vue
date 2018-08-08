@@ -1,20 +1,11 @@
 <template>
   <div id="nav">
-    <!-- <ul>
-      <li><a>Menu</a></li>
-      <li><a>Specials</a></li>
-      <li><a>Popular Items</a></li>
-      <li v-on:click="changeValue" ><a>Location</a></li>
-      <li v-on:click="changeValue" class = "signin" ><a>Sign In</a></li>
-    </ul>-->
-    <ul>
-      <button
-        v-for="tab in tabs"
-        v-bind:key="tab.name"
-        v-bind:class="['', { active: currentTab.name === tab.name }]"
-        v-on:click ="retrieveMap">{{ tab.name }}
-      </button>
-    </ul>
+    <Menu/>
+    <Specials/>
+    <Popular/>
+    <About/>
+    <Map/>
+    <Contact/>
     
     <ul class = "cart">
       <li>{{cartItems.length}}</li>
@@ -23,13 +14,26 @@
 
   </div>
 </template>
-        // v-on:click="currentTab = tab">{{ tab.name }}
 
 <script>
   import{mapActions} from 'vuex'
+  import Menu from './buttons/Menu'
+  import Specials from './buttons/Specials'
+  import Popular from './buttons/Popular'
+  import About from './buttons/About'
+  import Map from './buttons/Map'
+  import Contact from './buttons/Contact'
 
   export default {
     name: 'Navbar',
+    components: {
+      Menu,
+      Specials,
+      Popular,
+      About,
+      Map,
+      Contact
+    },
     data(){
       return{
         tabs: tabs,
@@ -54,31 +58,6 @@
       // console.log('updateVal')
     }
   }
-
-
-var tabs = [
-  {
-    name: 'Menu',
-  },
-  {
-    name: 'Location',
-  },
-  {
-    name: 'Payment',
-  },
-  {
-    name: 'Address',
-  },
-  {
-    name: 'Contact',
-  },
-  {
-    name: 'Order Now',
-  },
-  {
-    name: 'Sign In',
-  },
-]
 </script>
 
 <style>

@@ -26,18 +26,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     index: '', // specify to enable root proxying
     host: '...',
     contentBase: '...',
-    proxy: {
-      '/api': {
-        context: () => true,
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-        pathRewrite: {
-        '^/api': ''
-        },
-        secure: false
-      }
-    },
-
+    port: 8080,
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [

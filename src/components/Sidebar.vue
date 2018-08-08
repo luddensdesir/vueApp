@@ -1,15 +1,18 @@
 <template>
   <div id="sidebar" >
     <h1>Sidebar</h1>
-    <ul>
+    <Past/>
+    <Address/>
+    <Empty/>
+    <!-- <ul>
       <button
         v-for="tab in tabs"
         v-bind:key="tab.name"
         v-bind:class="['tab-button', { active: currentTab.name === tab.name }]"
-        v-on:click ="getSpecialMenu" 
+        v-on:click =""
         >{{ tab.name }}
       </button>
-    </ul>
+    </ul> -->
     
     <ul class = "cart">
       <li class = "" 
@@ -18,11 +21,18 @@
         <button v-on:click="removeItem(item, index)">x</button>
       </li>
     </ul> 
+
+    <Order/>
   </div>
 </template>
   
 <script>
   import{mapActions} from 'vuex'
+  import Order from './buttons/Order'
+  import Past from './buttons/Past'
+  import Address from './buttons/Address'
+  import Empty from './buttons/Empty'
+
   export default {
     name: 'Sidebar',
     data(){
@@ -30,6 +40,12 @@
         tabs: tabs,
         currentTab: tabs[0]
       };
+    },
+    components: {
+      Past,
+      Address,
+      Empty,
+      Order
     },
     computed:{
       cartItems(){
@@ -42,6 +58,9 @@
         console.log("retrieveSpecialist")
           this.$store.dispatch('retrieveSpecialist')
       },
+      testFunc: function(){
+        console.log('test')
+      },
       removeItem: function(item, index){
         var args = {item, index}
         this.$store.dispatch('removeFromCart', args)
@@ -51,38 +70,22 @@
     }
   }
 
-
 var tabs = [
-  {
-    name: 'Specials',
-    component: {
-      template: '<div >Delivery</div>'
-    }
-  },
-  {
-    name: 'Past Orders',
-    component: {
-      template: '<div>Delivery</div>'
-    }
-  },
-  {
-    name: 'Popular',
-    component: {
-      template: '<div>About</div>'
-    }
-  },
-  {
-    name: 'Order Now',
-    component: {
-      template: '<div>Kart</div>'
-    }
-  },
-  {
-    name: 'Empty Cart',
-    component: {
-      template: '<div>Kart</div>'
-    }
-  }
+  // {
+  //   name: 'Past Orders', 
+  // },
+  // {
+  //   name: 'Order Now', 
+  // },
+  // {
+  //   name: 'Address',
+  // },
+  // {
+  //   name: 'Empty Cart', 
+  // },
+  // {
+  //   name: 'Sign In',
+  // }
 ]
 </script>
 

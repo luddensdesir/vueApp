@@ -10,8 +10,6 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
-
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
@@ -19,6 +17,28 @@ module.exports = {
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+    //finally: https://github.com/webpack/webpack-dev-server/issues/458
+      //http://vuejs-templates.github.io/webpack/backend.html
+    // devServer: {
+      // index: '', // specify to enable root proxying
+      hot: true,
+      contentBase: '...',
+      port: 8080,
+      proxyTable: {
+        '!/': {
+          // context: () => true,
+          target: 'http://localhost:3000/',
+          // changeOrigin: true,
+          secure: false
+        },
+        // '**': {
+        //   context: () => true,
+        //   target: 'http://localhost:3000/',
+        //   changeOrigin: true,
+        //   secure: false
+        // }
+      },
+    // },
 
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and

@@ -1,9 +1,18 @@
 <template>
   <keep-alive> 
     <div id="center">
+      <form id = "personalInfo" class ="signinForm" v-on:submit.stop.prevent="updatePersonalInfo">
+        <input type="text" maxlength="50" class="" placeholder="name" name="name">
+        <input type="text" maxlength="50" class = "address" placeholder="address" name="address">
+        <button type="Submit" class="button btn btn-default">[update info]</button>
+      </form>
       <form id = "loginForm" class ="signinForm" v-on:submit.stop.prevent="login">
         <input type="text" maxlength="50" class="" placeholder="[login]" name="login">
+        <input type="password" maxlength="32" class="" placeholder="[password]" name="password2">
         <button type="Submit" class="button btn btn-default">[login]</button>
+      </form>
+      <form id = "tempPreauth" class ="signinForm" v-on:submit.stop.prevent="preauth">
+        <button type="Submit" class="button btn btn-default">[preauth]</button>
       </form>
       <form id = "submitForm" class ="signinForm" v-on:submit.stop.prevent="submitRegistration">
         <input type="text" maxlength="50" class="" placeholder="[name]" name="name">
@@ -66,27 +75,50 @@
         }
     },
     methods: {
-      login(ev){
-        var username = { username: ev.target.children[0].value }
-        this.$http.post('users/login', username)
+      updatePersonalInfo(ev){
+        var formData = this.formToJson(ev.target)
+
+        this.$http.post('users/update', {newUserInfo:formData, token: localStorage.getItem('loginToken')})
           .then(function(res){
-            console.log(res)
+            // console.log(res.body)
           })
       },
-      submitRegistration(ev){
-        var targ = ev.target
-        var children = targ.children
-        var formData = {}
-
+      preauth(ev){
+        console.log(localStorage.getItem('loginToken'))
+        this.$http.post('users/preauth', {token: localStorage.getItem('loginToken')})
+          .then(function(res){
+            console.log(res.body)
+          })
+      },
+      login(ev){
+        var creds = { 
+            username: ev.target.children[0].value,
+            password: ev.target.children[1].value
+          }
+                    
+        this.$http.post('users/login', creds)
+          .then(function(res){
+            localStorage.setItem('loginToken', res.body.token)
+            console.log('loginToken')
+            console.log(localStorage.getItem('loginToken'))
+          })
+      },
+      formToJson(el){
+        var children = el.children
+        var data = {}
         for(var i = 0; i < children.length-1; i++){
-          formData[children[i].name] = children[i].value
+          data[children[i].name] = children[i].value
         }
+        return data
+      },
+      submitRegistration(ev){
+        var formData = this.formToJson(ev.target)
         
         console.log(formData)
 
         this.$http.post('users/register', formData)
           .then(function(res){
-            console.log(res)
+            localStorage.setItem('loginToken', JSON.stringify(res.body.token));
           })
         
       },
@@ -100,11 +132,14 @@
       }
     },
     created(){
-      this.$http.get('http://localhost:3000/menu')
-      // this.$http.get('/api/menu')
-        .then(function(response){
-          this.$store.commit('updateAllPrices', response.body)
-        }); 
+      // this.$http.get('/menu/all')
+        // .then(function(response){
+          //**************************************************
+          //still need to match the menu items to their images
+          //**************************************************
+          // console.log(response.body)
+          this.$store.dispatch('retrieveMainMenu')
+        // }); 
     }
   }
 
@@ -294,6 +329,10 @@ body{
      -moz-transition: all .5s;
        -o-transition: all .5s;
           transition: all .5s;  
+}
+
+.address{
+  width:100%;
 }
 
 .signinForm{

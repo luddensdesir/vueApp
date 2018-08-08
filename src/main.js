@@ -47,13 +47,16 @@ export const store = new Vuex.Store({
   },
   mutations: {
     removeItem: (state, params) => {
-      console.log(params.index)
       state.cart.content.splice(params.index, 1)
       state.cart.total -= makePrecise(params.item.price)
     },
     addToCart: (state, item) => {
       state.cart.content.push(item)
       state.cart.total += makePrecise(item.price)
+    },
+    emptyCart: (state, items) => {
+      state.cart.content = []
+      state.cart.total = 0
     },
     changeValue: state => {
       state.cart.content.forEach(item => {
@@ -69,7 +72,7 @@ export const store = new Vuex.Store({
   },
   actions: {
     retrieveMap: (context, payload) => {
-      return Vue.http.get('api/getmap')
+      return Vue.http.get('/getmap')
         .then(function (response) {
           console.log('getMap')
           console.log(response.body)
@@ -77,32 +80,45 @@ export const store = new Vuex.Store({
         })
     },
     retrieveMenu: (context, payload) => {
-      return Vue.http.get('api/menu')
+      return Vue.http.get('/menu')
         .then(function (response) {
           console.log(response.body)
           context.commit('updateSpecials', payload)
         })
     },
-    retrievePastOrders: (context, payload) => {
-      return Vue.http.get('api/pastorders')
+    getPastOrders: (context, payload) => {
+      return Vue.http.get('users/pastorders', {headers: {token: localStorage.getItem('loginToken')}})
         .then(function (response) {
           console.log(response.body)
           context.commit('updateSpecials', payload)
         })
     },
     retrievePopularOrders: (context, payload) => {
-      return Vue.http.get('api/popular')
+      return Vue.http.get('/popular')
         .then(function (response) {
           console.log(response.body)
           context.commit('updateSpecials', payload)
         })
     },
-    retrieveSpecialist: (context, payload) => {
-      return Vue.http.get('api/specials')
-      // return Vue.http.get('/api/specials')
+    retrievePopularMenu: (context) => {
+      return Vue.http.get('/menu/popular')
         .then(function (response) {
           console.log(response.body)
-          context.commit('updateSpecials', payload)
+          // context.commit('updateAllPrices', response.body)
+        })
+    },
+    retrieveMainMenu: (context) => {
+      return Vue.http.get('/menu/all')
+        .then(function (response) {
+          console.log(response.body)
+          context.commit('updateAllPrices', response.body)
+        })
+    },
+    retrieveSpeciallist: (context, payload) => {
+      return Vue.http.get('menu/specials')
+        .then(function (response) {
+          console.log(response.body)
+          // context.commit('')
         })
     },
     removeFromCart: (context, payload) => {

@@ -1,5 +1,6 @@
 var express = require('express')
 var GMaps = require('googlemaps')
+var Menu = require('../models/menu')
 var router = express.Router()
 
 var apiKey = (process.env.gMapsApi || require('../private').apiKey)
@@ -100,9 +101,8 @@ function getMenuItems () {
   return menuItems
 }
 
-router.get('/', function (req, res) {
-  //  res.sendFile(__dirname + '/index.html');
-  res.json({this: "is index"})
+router.get('/', function (req, res){ 
+  res.sendFile(__dirname + '../app/index.html')
 })
 
 router.get('/getmap', function (req, res) {
@@ -121,36 +121,23 @@ router.get('/signin', function (req, res) {
 })
 
 router.get('/popular', function (req, res) {
-  res.json({val1: ['item1', 'item3', 'item7', 'item2']})
+  res.json(Menu.getPopularMenu())
 })
 
-// protected routes
 router.get('/order', function (req, res) {
   res.json({val1: 'this is order'})
 })
 
-// protected routes
 router.get('/specials', function (req, res) {
-  res.json(getSpecials())
+  res.json(Menu.getSpecialMenu())
 })
 
-// protected routes
 router.get('/menu', function (req, res) {
   res.json(getMenuItems())
-})
-
-//bring up all past orders in side bar. when clicked it should bring all of them 
-router.get('/pastOrders/', function (req, res) {
-  res.json({val1: [['item1', 'item3', 'item7', 'item2'],
-    ['item1', 'item3', 'item7', 'item2'],
-    ['item1', 'item3', 'item7', 'item2'],
-    ['item1', 'item3', 'item7', 'item2']]})
 })
 
 router.get('/payment/', function (req, res) {
   res.json({val1: 'this is payment'})
 })
-
-// need preauth route here
 
 module.exports = router
