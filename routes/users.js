@@ -88,6 +88,7 @@ router.post('/register', function (req, res) {
 })
 
 router.post('/update', function (req, res) {
+  console.log(req.body)
   decodeToken(req.body.token).then(result => {
     req.body.userID = result.id
     User.updateUserInfo(req.body.userID, req.body.newUserInfo, function (err, user) {

@@ -1,9 +1,9 @@
 <template>
-  <div id="sidebar" >
+  <div class="sidebar" >
     <h1>Sidebar</h1>
     <Past/>
-    <Address/>
-    <Empty/>
+    <Account/>
+    <EmptyCart/>
     <!-- <ul>
       <button
         v-for="tab in tabs"
@@ -30,8 +30,8 @@
   import{mapActions} from 'vuex'
   import Order from './buttons/Order'
   import Past from './buttons/Past'
-  import Address from './buttons/Address'
-  import Empty from './buttons/Empty'
+  import Account from './buttons/Account'
+  import EmptyCart from './buttons/EmptyCart'
 
   export default {
     name: 'Sidebar',
@@ -43,8 +43,8 @@
     },
     components: {
       Past,
-      Address,
-      Empty,
+      Account,
+      EmptyCart,
       Order
     },
     computed:{
@@ -95,15 +95,7 @@ var tabs = [
 .tab-button{
   width:100%;
 }
-
-#sidebar {
-  background-color: blue;
-  grid-column-start: 1;
-  grid-column-end:   3;
-  grid-row-start:    2;
-  grid-row-end:      11;
-}
-
+  
 .cart li{
   display: block;
 }
@@ -115,6 +107,17 @@ li{
 
 a{
   text-decoration: none;
+}
+
+.sidebar{
+  background-color: rgb(247, 247, 247);
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  grid-column-start: 1;
+  grid-column-end:   3;
+  grid-row-start:    2;
+  grid-row-end:      11;
+  background-color: rgb(255, 252, 225);
 }
 
 @media(max-width: 640px){
@@ -130,13 +133,6 @@ a{
   .cart{
     width:25%;
     float: right;
-  }
-
-  #sidebar {
-    grid-column-start: 1;
-    grid-column-end:   11;
-    grid-row-start:    2;
-    grid-row-end:      3;
-  }
+  } 
 }
 </style>

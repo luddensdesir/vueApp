@@ -101,7 +101,7 @@ function getMenuItems () {
   return menuItems
 }
 
-router.get('/', function (req, res){ 
+router.get('/', function (req, res) { 
   res.sendFile(__dirname + '../app/index.html')
 })
 

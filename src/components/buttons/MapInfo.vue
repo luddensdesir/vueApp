@@ -1,19 +1,22 @@
 <template>
-  <button id="addressButton" class="tab-button">
-    Address
+  <button id="mapButton" class="tab-button" v-on:click="getMapData">
+    Map
   </button>
 </template>
   
 <script>
   export default {
-    name: 'Address',
+    name: 'MapInfo',
     data(){
       return{
       };
     },
     computed:{
     },
-    methods: {  
+    methods: {
+      getMapData(){
+        this.$store.dispatch('getMapData')
+      }
     },
     created(){
     }
@@ -22,7 +25,7 @@
 </script>
 
 <style scoped> 
-  #addressButton{
+  #mapButton{
 
   }
 </style>

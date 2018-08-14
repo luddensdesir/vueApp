@@ -1,13 +1,12 @@
 
 <template>
   <div id="checkout">
-    <button @click="stripecheckout">SCheckout</button>
-    <button @click="ppcheckout">PPCheckout</button>
+    <button @click="stripecheckout">Pay With Card</button>
+    <button @click="ppcheckout">PayPal</button>
   </div>
 </template> 
 
 <script>  
-  
   export default {
     name: 'Checkout',
     methods: {

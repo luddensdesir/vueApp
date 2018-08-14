@@ -6,10 +6,11 @@ import vueRresource from 'vue-resource'
 import Vuex from 'vuex'
 import VueStripeCheckout from 'vue-stripe-checkout'
 import img8 from './assets/8.jpg'
+import utils from './components/scripts/common.js'
 
 Vue.config.productionTip = false
 
-const options = {
+const stripeOptions = {
   key: 'pk_test_TQvyHRdUxoRorhFQOAHRNVdq',
   image: img8,
   locale: 'auto',
@@ -20,7 +21,7 @@ const options = {
 
 Vue.use(Vuex)
 Vue.use(vueRresource)
-Vue.use(VueStripeCheckout, options)
+Vue.use(VueStripeCheckout, stripeOptions)
 
 function makePrecise (num) {
   var factor = Math.pow(10, 1)
@@ -71,12 +72,21 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
-    retrieveMap: (context, payload) => {
+    getMapData: (context, payload) => {
       return Vue.http.get('/getmap')
         .then(function (response) {
           console.log('getMap')
           console.log(response.body)
           // context.commit('updateSpecials', payload)
+        })
+    },
+    updateAccountInfo: (context, payload) => {
+      console.log('confirm update')
+      console.log(payload)
+      return Vue.http.get('users/update', payload)
+        .then(function (response) {
+          console.log(response.body)
+          context.commit('confirmInfoUpdate', response.body)
         })
     },
     retrieveMenu: (context, payload) => {
@@ -87,7 +97,7 @@ export const store = new Vuex.Store({
         })
     },
     getPastOrders: (context, payload) => {
-      return Vue.http.get('users/pastorders', {headers: {token: localStorage.getItem('loginToken')}})
+      return Vue.http.get('users/pastorders', {headers: utils.getAuthToken()})
         .then(function (response) {
           console.log(response.body)
           context.commit('updateSpecials', payload)
@@ -125,11 +135,6 @@ export const store = new Vuex.Store({
       context.commit('removeItem', payload)
     },
     changeValue: (context, payload) => {
-      // $http doesn't exist here for some reason
-      // return Vue.http.get('http://localhost:3000/api/')
-      //   .then(function (response) {
-      //     // console.log(response.body)
-      //   })
     }
   }
 })

@@ -1,12 +1,11 @@
 <template>
-  <div id="nav">
+  <div class="nav">
     <Menu/>
     <Specials/>
     <Popular/>
+    <MapInfo/>
     <About/>
-    <Map/>
-    <Contact/>
-    
+    <Contact/> 
     <ul class = "cart">
       <li>{{cartItems.length}}</li>
       <li>{{total}}</li>
@@ -21,7 +20,7 @@
   import Specials from './buttons/Specials'
   import Popular from './buttons/Popular'
   import About from './buttons/About'
-  import Map from './buttons/Map'
+  import MapInfo from './buttons/MapInfo'
   import Contact from './buttons/Contact'
 
   export default {
@@ -31,13 +30,11 @@
       Specials,
       Popular,
       About,
-      Map,
+      MapInfo,
       Contact
     },
     data(){
       return{
-        tabs: tabs,
-        currentTab: tabs[0]
       };
     },
     computed:{
@@ -61,35 +58,32 @@
 </script>
 
 <style>
+  .nav {
+    grid-column-start: 1;
+    grid-column-end:   11;
+    grid-row-start:    1;
+    grid-row-end:      2;
+    width: 100%;
+    border-bottom: 3px solid black;
+    background-color: rgb(255, 252, 225);
+  }  
+  .cart{
+  }
 
-.cart{
-  /* text-align: center; */
-}
+  ul{
+    padding: 0px;
+    width: 95%;
+    margin-right: 0px;
+    margin: auto;
+  }
 
-ul{
-  padding: 0px;
-  width: 95%;
-  margin-right: 0px;
-  margin: auto;
-}
-
-.signin{
-  float: right;
-  position: relative;
-  right: 0%;
-}
-
-#nav li{
-  list-style: none;
-  /* display:inline; */
-}
-
-#nav {
-  background-color: green;
-  grid-column-start: 1;
-  grid-column-end:   11;
-  grid-row-start:    1;
-  grid-row-end:      2;
-  width: 100%;
-}  
+  .signin{
+    float: right;
+    position: relative;
+    right: 0%;
+  }
+   
+  #nav li{
+    list-style: none;
+  }
 </style>

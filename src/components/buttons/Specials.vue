@@ -2,7 +2,7 @@
   <button id="specialsButton" class="tab-button"  v-on:click="getSpecials">
     Specials
   </button>
-</template>retrieveSpecialist
+</template>
   
 <script>
   export default {
