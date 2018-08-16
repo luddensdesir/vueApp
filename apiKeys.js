@@ -1,4 +1,7 @@
+var tryRequire = require('try-require')
+
 var privateData 
+
 if(process.env.HEROKU){
     var env = process.env
     privateData = {
@@ -12,10 +15,12 @@ if(process.env.HEROKU){
         STRIPE_SECRET: env.STRIPE_SECRET
     }
 } else {
-    var url = './private.js'
-    if(require.resolve(url)){
+    var url = __dirname + '/private.js'
+    if(tryRequire.resolve(url)){
       privateData = require(url)
     }
+
+    console.log(tryRequire.lastError())
 }
 
 module.exports = privateData
