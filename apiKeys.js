@@ -1,5 +1,5 @@
 var privateData 
-if(process.env.HEROKU == true){
+if(process.env.HEROKU){
     var env = process.env
     privateData = {
         AES_PASS: env.AES_PASS,
@@ -12,7 +12,10 @@ if(process.env.HEROKU == true){
         STRIPE_SECRET: env.STRIPE_SECRET
     }
 } else {
-    privateData = require('./private.js')
+    var url = './private.js'
+    if(require.resolve(url)){
+      privateData = require(url)
+    }
 }
 
 module.exports = privateData
