@@ -2,15 +2,8 @@ var express = require('express')
 var GMaps = require('googlemaps')
 var Menu = require('../models/menu')
 var router = express.Router()
-var privateData
-
-try {
-  privateData = require('../private')
-} catch (ex) {
-  console.log('private keys not found using env')
-}
-
-var apiKey = (process.env.gMapsApi || privateData.apiKey)
+var keys = require('../apiKeys.js')
+var apiKey = keys.GMAPSKEY
 
 console.log("apiKey")
 console.log(apiKey)

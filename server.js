@@ -12,19 +12,10 @@ var main = require('./routes/index');
 var users = require('./routes/users');
 var menu = require('./routes/menu');
 var checkout = require('./routes/checkout');
-var cors = require('cors')
-var privateData 
-
-try{
-  privateData = require('./private')
-} catch(ex) {
-  console.log('private keys not found using env')
-}
-
-var targetConnection = (process.env.MONGODB_URI || privateData.connection);
-
-var dev = process.env.NODE_ENV === 'dev'
-
+var cors = require('cors');
+var keys = require('./apiKeys.js');
+var targetConnection = keys.MONGODB_URI
+  
 console.log("targetConnection")
 console.log(targetConnection)
 
@@ -60,9 +51,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-if(dev){
+if(!process.env.HEROKU){
   // app.use(allowCrossDomain)
-  console.log('---CORS ENABLED--- ' + dev)
+  console.log('---CORS ENABLED--- ' + !process.env.HEROKU)
   app.use(cors())
 
   // app.get('/', function(res, req){

@@ -2,26 +2,10 @@ var express = require('express')
 var paypal = require('paypal-rest-sdk')
 // var bodyParser = require('body-parser')
 var router = express.Router()
-var stripeKey
-var paypalKey
-var paypalID
-var privateData
-
-try {
-  privateData = require('../private')
-} catch (ex) {
-  console.log('private keys not found using env')
-}
-
-if (process.env.NOD_ENV === 'production') {
-  stripeKey = process.env.STRIPE_SECRET
-  paypalKey = process.env.PAYPAL_SECRET
-  paypalID = process.env.PAYPAL_ID
-} else {
-  stripeKey = privateData.stripeS
-  paypalKey = privateData.paypalS
-  paypalID = privateData.paypalID
-}
+var keys = require('../apiKeys.js')
+var stripeKey = keys.STRIPE_SECRET
+var paypalKey = keys.PAYPAL_SECRET
+var paypalID = keys.PAYPAL_ID
 
 var stripe = require('stripe')(stripeKey)
 
