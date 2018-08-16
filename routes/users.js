@@ -8,9 +8,16 @@ var LocalStrategy = require('passport-local').Strategy
 var jwt = require('jsonwebtoken')
 var bodyParser = require('body-parser')
 var AES = require('gibberish-aes/src/gibberish-aes.js')
+var privateData
 
-var jwtSecret = (process.env.JWT_SECRET || require('../private').jwtSecret)
-var aesPass = (process.env.AES_PASS || require('../private').aesPass)
+try {
+  privateData = require('../private')
+} catch (ex) {
+  console.log('private keys not found using env')
+}
+
+var jwtSecret = (process.env.JWT_SECRET || privateData.jwtSecret)
+var aesPass = (process.env.AES_PASS || privateData.aesPass)
 AES.size(128)
 
 var jwtExpire = '50m'

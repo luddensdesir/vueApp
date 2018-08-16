@@ -13,8 +13,15 @@ var users = require('./routes/users');
 var menu = require('./routes/menu');
 var checkout = require('./routes/checkout');
 var cors = require('cors')
+var privateData 
 
-var targetConnection = (process.env.MONGODB_URI || require('./private').connection);
+try{
+  privateData = require('./private')
+} catch(ex) {
+  console.log('private keys not found using env')
+}
+
+var targetConnection = (process.env.MONGODB_URI || privateData.connection);
 
 var dev = process.env.NODE_ENV === 'dev'
 
@@ -64,6 +71,7 @@ if(dev){
 
 app.get('/', function (req, res) { 
   //for the initial connect. i really hate webpack proxy
+  console.log('__!!getting index!!__')
   res.sendFile(path.join(__dirname + '/app/index.html'));
 })
 

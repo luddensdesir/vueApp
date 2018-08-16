@@ -5,15 +5,22 @@ var router = express.Router()
 var stripeKey
 var paypalKey
 var paypalID
+var privateData
+
+try {
+  privateData = require('../private')
+} catch (ex) {
+  console.log('private keys not found using env')
+}
 
 if (process.env.NOD_ENV === 'production') {
   stripeKey = process.env.STRIPE_SECRET
   paypalKey = process.env.PAYPAL_SECRET
   paypalID = process.env.PAYPAL_ID
 } else {
-  stripeKey = require('../private').stripeS
-  paypalKey = require('../private').paypalS
-  paypalID = require('../private').paypalID
+  stripeKey = privateData.stripeS
+  paypalKey = privateData.paypalS
+  paypalID = privateData.paypalID
 }
 
 var stripe = require('stripe')(stripeKey)
