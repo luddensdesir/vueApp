@@ -39,6 +39,7 @@
     "passport-local": "^1.0.0",
     "paypal-rest-sdk": "^1.8.1",
     "stripe": "*",
+    "try-require": "^1.2.1",
     "vue": "^2.5.2",
     "vue-resource": "*",
     "vue-stripe-checkout": "^1.0.7",
