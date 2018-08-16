@@ -101,9 +101,10 @@ function getMenuItems () {
   return menuItems
 }
 
-router.get('/', function (req, res) { 
-  res.sendFile(__dirname + '../app/index.html')
-})
+// router.get('/', function (req, res) { 
+//   // console.log('getting index!!!')
+//   // res.sendFile(__dirname + '../app/index.html')
+// })
 
 router.get('/getmap', function (req, res) {
   gmAPI.geocode(geocodeParams, function (err, result) {

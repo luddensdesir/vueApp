@@ -62,8 +62,12 @@ if(dev){
   // });
 }
 
+app.get('/', function (req, res) { 
+  //for the initial connect. i really hate webpack proxy
+  res.sendFile(path.join(__dirname + '/app/index.html'));
+})
 
-
+//for serving images and the client side javascript
 app.use(express.static(path.join(__dirname, 'app')));
 
 app.use(passport.initialize());
@@ -92,7 +96,9 @@ app.use(function (req, res, next) {
  next();
 });
 app.use(cors())
-app.use('/', main);
+
+
+// app.use('/', main);
 app.use('/menu', menu); 
 app.use('/users', users); 
 app.use('/checkout', checkout); 

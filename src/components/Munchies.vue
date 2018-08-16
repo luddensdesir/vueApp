@@ -11,6 +11,7 @@
             v-bind:key="tab.name"
             v-bind:class="['item', { active: currentTab.name === tab.name }]"
             v-on:click="currentTab = tab">
+            <!-- <MenuItem/> -->
             <div class = "purchase">
               <div class = "pButton" @click="addToCart($event, tab)">
                 <span>Add {{ tab.name }} To Cart, For{{tab.price}}</span>
@@ -39,10 +40,11 @@
   import UpdateInfo from './UpdateInfo'
   import LoginForm from './LoginForm'
   import RegisterForm from './RegisterForm'
+  import MenuItem from './munchies/MenuItem'
 
   export default {
     name: 'Munchies',
-    components: {UpdateInfo, LoginForm, RegisterForm},
+    components: { UpdateInfo, LoginForm, MenuItem, RegisterForm },
     data(){
       return{
         tabs: tabs,
