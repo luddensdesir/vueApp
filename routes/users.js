@@ -131,17 +131,13 @@ router.post('/update', function (req, res) {
 
 const encodeToken = function (items) {
   var encoded = items
-  console.log('Encode Token')
-  console.log(encoded)
   encoded = AES.enc(encoded, aesPass)
-  console.log(encoded)
   return jwt.sign({content: encoded}, jwtSecret, {
     expiresIn: jwtExpire
   })
 }
 
 async function decodeToken (token) {
-  console.log('Decode token: ')
   return new Promise(resolve => {
     jwt.verify(token, jwtSecret, function (err, decoded) {
       if (err) {

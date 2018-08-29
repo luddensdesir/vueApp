@@ -9,13 +9,6 @@ var paypalID = keys.PAYPAL_ID
 
 var stripe = require('stripe')(stripeKey)
 
-console.log("stripeKey")
-console.log(stripeKey)
-console.log("paypalKey")
-console.log(paypalKey)
-console.log("paypalID")
-console.log(paypalID)
-
 paypal.configure({
   // 'mode': 'live',
   'mode': 'sandbox', //sandbox or live

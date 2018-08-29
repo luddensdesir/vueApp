@@ -1,22 +1,18 @@
 <template>
   <keep-alive> 
-    <div class="center">
-      <UpdateInfo/>
-      <LoginForm/>
-      <RegisterForm/>
+    <div class="center col5">
+      <Checkout v-bind:is="checkingOut" />
+      <UpdateInfo v-bind:is="updatingInfo" />
+      <LoginForm  v-bind:is="notLoggedIn" />
+      <RegisterForm  v-bind:is="notRegistered" />
       <div id = "albumcontainer">
         <div id = "album" >
           <div
-            v-for="tab in menuItems"
+            v-for="(tab, $index) in menuItems"
             v-bind:key="tab.name"
-            v-bind:class="['item', { active: currentTab.name === tab.name }]"
+            v-bind:class="['item', {'col2': $index % 2 === 0, 'col2d': $index % 2 !== 0 }]"
             v-on:click="currentTab = tab">
-            <!-- <MenuItem/> -->
-            <div class = "purchase">
-              <div class = "pButton" @click="addToCart($event, tab)">
-                <span>Add {{ tab.name }} To Cart, For{{tab.price}}</span>
-              </div>
-            </div>
+            <MenuItem :tab="tab"/> 
             <div class = "image">
               <img v-bind:src="tab.image"/>
             </div>
@@ -41,10 +37,11 @@
   import LoginForm from './LoginForm'
   import RegisterForm from './RegisterForm'
   import MenuItem from './munchies/MenuItem'
+  import Checkout from './Checkout'
 
   export default {
     name: 'Munchies',
-    components: { UpdateInfo, LoginForm, MenuItem, RegisterForm },
+    components: { UpdateInfo,  MenuItem, Checkout, RegisterForm },
     data(){
       return{
         tabs: tabs,
@@ -52,6 +49,8 @@
       };
     },
     computed: {
+        informForms(){
+        },
         menuItems(){
           var menu = this.$store.getters.menu; 
           
@@ -71,11 +70,6 @@
           .then(function(res){
             utils.setAuthToken(res.body.token)
           })
-      },
-      addToCart: function($event, newItem){
-        var date = new Date().getTime();
-        newItem.date = date;
-        this.$emit('itemToCart', newItem );
       },
       updateVal: function(){
         this.$store.commit('changeValue')
@@ -107,7 +101,8 @@
 
 </script>
  
-<style> 
+<style lang ="scss">
+    
   #albumcontainer{
     overflow:hidden;
     width:100%;
@@ -131,6 +126,12 @@
     float: right;
     height: 200px;
     position: relative;
+    padding: 15px;
+    box-sizing: border-box;
+    /* background-color: red; */
+    border-top: 1px solid #C63B41;
+    border-bottom: 1px solid #C63B41;
+    /* background-color: rgb(230, 226, 193); */
   }
 
   .item:nth-child(even) {
@@ -156,30 +157,12 @@
     width: auto;
   }
 
-  .pButton{
-    height: 75%;
-    width: 75%;
-    background-color: red;
-    margin-right: auto;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-left: auto;
-  }
 
   .item:nth-child(even) .purchase{
     float: left;
     left: 0%;
   }
 
-  .purchase{
-    float: right;
-    right: 0%;
-    /* position: relative; */
-    height: 100%;
-    width: 20%;
-    background-color: green;
-  }
   body{
     overflow: hidden;
   }

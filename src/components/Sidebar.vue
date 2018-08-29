@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" >
+  <div class="sidebar col1" >
     <h1>Sidebar</h1>
     <Past/>
     <Account/>
@@ -90,8 +90,6 @@ var tabs = [
 </script>
 
 <style scoped>
-.cart{
-}
 .tab-button{
   width:100%;
 }
@@ -110,14 +108,14 @@ a{
 }
 
 .sidebar{
-  background-color: rgb(247, 247, 247);
+  /* background-color: rgb(247, 247, 247); */
   border-top: 3px solid black;
   border-bottom: 3px solid black;
   grid-column-start: 1;
   grid-column-end:   3;
   grid-row-start:    2;
   grid-row-end:      11;
-  background-color: rgb(255, 252, 225);
+  /* background-color: rgb(255, 252, 225); */
 }
 
 @media(max-width: 640px){

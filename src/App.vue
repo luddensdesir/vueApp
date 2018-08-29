@@ -1,12 +1,8 @@
 <template>
   <div id="app">
-    <!-- <Chart/> -->
-    <!-- <h1>{{value}}</h1> -->
-    <!--<Slider @sliderAdjusted= "modifyValue($event)" v-bind:position ="sendthis" /></h1> -->
     <Sidebar/>
     <Navbar/>
-    <Checkout/>
-    <Munchies @itemToCart = "toCart" />
+    <Munchies/>
     <!-- <Map/> -->
     <!-- <Contact/> -->
   </div >
@@ -16,7 +12,6 @@
   import Navbar from './components/Navbar'
   import Sidebar from './components/Sidebar'
   import Munchies from './components/Munchies'
-  import Checkout from './components/Checkout'
   import Contact from './components/Contact'
   import Map from './components/Map'
 
@@ -28,27 +23,58 @@
         value: '0',
       };
     },
-    components: { Navbar, Sidebar, Munchies, Checkout, Map, Contact},
+    components: { Navbar, Sidebar, Munchies, Map, Contact},
     computed: {
       cart(){
         return this.$store.getters.cart;
       }
     },
-    methods: {
-      toCart: function(var1){
-        this.$store.commit('addToCart', var1)
-      }
+    methods: { 
     }
   }
 </script>
 
-<style>
+<style lang="scss">
+$color: complement(rgb(189, 59, 59));
+$color1: saturate(adjust-hue( $color, 180),50);
+$color1: lighten($color1, 35);
+$color2: lighten($color1, 5);
+$color2d: darken($color1, 5);
+$color3: lighten($color, 45);
+$color4: darken(adjust-hue($color1, 240), 10);
+$color5: $color;
+
+input{
+  background-color: $color3;
+  border: 0px;
+  border-bottom: 2px solid $color4;
+}
+.col{
+  background-color: $color;
+}
+.col1{
+  background-color: $color1;
+}
+.col2{
+  background-color: $color2;
+}
+.col2d{
+  background-color: $color2d;
+}
+.col3{
+  background-color: $color3;
+}
+.col4{
+  background-color: $color4;
+}
+.col4{
+  background-color: $color5;
+}
+
 button{
-  /* background-color: rgb(201, 188, 67); */
-  background-color: rgb(189, 59, 59);
+  background-color: $color4;
   border: 0px;
   border-left: 3px solid black;
-  color: white;
 }
 
 .center {
@@ -61,7 +87,7 @@ button{
   border-top: 3px solid black;
   border-bottom: 3px solid black;
   overflow: hidden;
-  background-color: rgb(255, 252, 225);
+  // background-color: rgb(255, 252, 225);
 }
 #app {
   width: calc(35% + 520px);
@@ -83,8 +109,10 @@ body, html{
   padding: 0px;
   margin: 0px;
   width: 100%;
-  background-color: rgb(230, 230, 230);
+  background-color: $color3;
+  font: 1em sans-serif;
 }
+
 
 @media(max-width: 820px){
   #app {

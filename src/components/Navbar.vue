@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav col1">
     <Menu/>
     <Specials/>
     <Popular/>
@@ -65,7 +65,7 @@
     grid-row-end:      2;
     width: 100%;
     border-bottom: 3px solid black;
-    background-color: rgb(255, 252, 225);
+    /* background-color: rgb(255, 252, 225); */
   }  
   .cart{
   }

@@ -5,9 +5,6 @@ var router = express.Router()
 var keys = require('../apiKeys.js')
 var apiKey = keys.GMAPSKEY
 
-console.log("apiKey")
-console.log(apiKey)
-
 var publicConfig = {
   key: apiKey,
   stagger_time: 1000, // for elevationPath

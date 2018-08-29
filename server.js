@@ -16,9 +16,6 @@ var cors = require('cors');
 var keys = require('./apiKeys.js');
 var targetConnection = keys.MONGODB_URI
   
-console.log("targetConnection")
-console.log(targetConnection)
-
 var options = { keepAlive: 300000, connectTimeoutMS: 30000, autoIndex:false }
 
 let dbConnection = mongoose.connect(targetConnection, options, function(err, db){
@@ -52,16 +49,12 @@ app.use(cookieParser());
 
 
 if(!process.env.HEROKU){
-  // app.use(allowCrossDomain)
   console.log('---CORS ENABLED--- ' + !process.env.HEROKU)
   app.use(cors())
-
-  // app.get('/', function(res, req){
-  // });
 }
 
 app.get('/', function (req, res) { 
-  //for the initial connect. i really hate webpack proxy
+  //for the initial connect
   console.log('__!!getting index!!__')
   res.sendFile(path.join(__dirname + '/app/index.html'));
 })
