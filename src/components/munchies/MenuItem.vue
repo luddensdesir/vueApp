@@ -30,11 +30,6 @@
 </script>
 
 <style scoped> 
-  .menuItem{
-    width: 100%;
-    height: 100px;
-    /* background-color:green; */
-  }
 
   .purchase{
     float: right;
@@ -42,7 +37,6 @@
     /* position: relative; */
     height: 100%;
     width: 20%;
-    /* background-color: green; */
   }
 
   .pButton{
@@ -55,4 +49,16 @@
     transform: translateY(-50%);
     margin-left: auto;
   }
+
+  @media(max-width: 840px){
+    .purchase{
+      position: absolute;
+      width: 100%;
+      z-index: 2;
+      background-color: white;
+      height: 15%;
+      bottom: 0px;
+    }   
+  }
+  
 </style>

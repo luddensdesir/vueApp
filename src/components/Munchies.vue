@@ -13,9 +13,9 @@
             v-bind:class="['item', {'col2': $index % 2 === 0, 'col2d': $index % 2 !== 0 }]"
             v-on:click="currentTab = tab">
             <MenuItem :tab="tab"/> 
-            <div class = "image">
+            <!-- <div class = "image"> -->
               <img v-bind:src="tab.image"/>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
       </div>
@@ -126,37 +126,29 @@
     float: right;
     height: 200px;
     position: relative;
-    padding: 15px;
-    box-sizing: border-box;
+    /* padding: 15px; */
+    /* box-sizing: border-box; */
     /* background-color: red; */
     border-top: 1px solid #C63B41;
     border-bottom: 1px solid #C63B41;
     /* background-color: rgb(230, 226, 193); */
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
   }
 
+  .item:last-child {
+    margin-bottom: 0px;
+  }
+  .item:nth-child(1) {
+    margin-top: 0px;
+  }
+  
   .item:nth-child(even) {
     /* background-color: red; */
     float: left;
     text-align: right;
   }
-
-  .image{
-    height: 100%;
-    float: right;
-    right: 0%;
-  }
-
-
-  .item:nth-child(even) .image{
-    float: left;
-    left: 0%;
-  }
-
-  .item img{
-    height: 100%;
-    width: auto;
-  }
-
 
   .item:nth-child(even) .purchase{
     float: left;
@@ -179,14 +171,42 @@
   }
 
   .signinForm{
-    
   }
+
+  img{
+    height: auto;
+    float: right;
+    right: 0%;
+    width: 80%;
+  }
+
+  .item:nth-child(even) img{
+    float: left;
+    left: 0%;
+  }
+  @media(max-width: 840px){
+    img{
+      height: auto;
+      width: 100%;
+    }    
+  }
+
   @media(max-width: 640px){
+    img{
+      /* height: auto; */
+      /* width: 100%; */
+    } 
     .center {
       grid-column-start: 1;
       grid-column-end:   11;
       grid-row-start:    3;
       grid-row-end:      11;
+    }
+  }
+
+  @media(max-width: 510px){
+    .item{ 
+      height: auto;
     }
   }
 </style>

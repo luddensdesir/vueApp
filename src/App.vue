@@ -36,8 +36,8 @@
 
 <style lang="scss">
 $color: complement(rgb(189, 59, 59));
-$color1: saturate(adjust-hue( $color, 180),50);
-$color1: lighten($color1, 35);
+$color1: desaturate(adjust-hue( $color, 180),55);
+$color1: lighten($color1, 55);
 $color2: lighten($color1, 5);
 $color2d: darken($color1, 5);
 $color3: lighten($color, 45);

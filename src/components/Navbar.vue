@@ -65,16 +65,24 @@
     grid-row-end:      2;
     width: 100%;
     border-bottom: 3px solid black;
-    /* background-color: rgb(255, 252, 225); */
+    padding: 25px;
+    box-sizing: border-box;
   }  
+
   .cart{
+    width: auto;
+    float: right;
   }
+
+  
 
   ul{
     padding: 0px;
-    width: 95%;
+    width: auto;
     margin-right: 0px;
     margin: auto;
+    list-style: none;
+    float: left;
   }
 
   .signin{

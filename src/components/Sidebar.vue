@@ -17,7 +17,7 @@
     <ul class = "cart">
       <li class = "" 
         v-for="(item, index) in cartItems"
-        v-bind:key="item.id">{{item.name}} + {{ item.price }}
+        v-bind:key="item.id">{{item.name}} <br class="priceBreak"/> + {{ item.price }}
         <button v-on:click="removeItem(item, index)">x</button>
       </li>
     </ul> 
@@ -93,6 +93,10 @@ var tabs = [
 .tab-button{
   width:100%;
 }
+
+.priceBreak{
+  /* display: none; */
+}
   
 .cart li{
   display: block;
@@ -100,7 +104,7 @@ var tabs = [
 
 li{
   list-style: none;
-  color: white;
+  /* color: white; */
 }
 
 a{
@@ -115,10 +119,21 @@ a{
   grid-column-end:   3;
   grid-row-start:    2;
   grid-row-end:      11;
+  box-sizing: border-box;
+  padding: 25px;
+  /* font-size: 1vi; */
   /* background-color: rgb(255, 252, 225); */
 }
 
+h1{
+  margin-top: 0px;
+}
+
 @media(max-width: 640px){
+  .priceBreak{
+    display: none;
+  }
+
   ul{
     width: 25%;
     float: left;
@@ -128,8 +143,16 @@ a{
     display: inline;
   }
 
+  .sidebar{
+    grid-column-start: 1;
+    grid-column-end:   11;
+    grid-row-start:    2;
+    grid-row-end:      3;
+  }
+
   .cart{
-    width:25%;
+    /* width:25%; */
+    width:100%;
     float: right;
   } 
 }
