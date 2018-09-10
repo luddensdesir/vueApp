@@ -24,8 +24,7 @@ Vue.use(vueRresource)
 Vue.use(VueStripeCheckout, stripeOptions)
 
 function makePrecise (num) {
-  var factor = Math.pow(10, 1)
-  return Math.round(num * factor) / factor
+  return parseFloat(num.toFixed(2))
 }
 
 export const store = new Vuex.Store({

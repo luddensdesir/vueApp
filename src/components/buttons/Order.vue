@@ -1,12 +1,14 @@
 <template>
   <button id="orderButton" class="tab-button">
-    Order Now
+    {{total}} items for {{price}}!<br/>
+    Checkout 
   </button>
 </template>
   
 <script>
   export default {
     name: 'Order',
+    props: ['total', 'price'],
     data(){
       return{
       };

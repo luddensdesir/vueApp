@@ -1,7 +1,7 @@
 <template>
   <div class = "purchase">
     <div class = "pButton $color4" @click="addToCart($event, tab)">
-      <span>Add {{ tab.name }} To Cart, For{{ tab.price}}</span>
+      <span>Add {{ tab.name }} To Cart, For {{ tab.price}}</span>
     </div>
   </div>
 </template>
@@ -34,7 +34,6 @@
   .purchase{
     float: right;
     right: 0%;
-    /* position: relative; */
     height: 100%;
     width: 20%;
   }
@@ -42,7 +41,6 @@
   .pButton{
     height: 75%;
     width: 75%;
-    /* background-color: white; */
     margin-right: auto;
     position: relative;
     top: 50%;

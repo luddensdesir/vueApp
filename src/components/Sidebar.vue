@@ -1,19 +1,9 @@
 <template>
   <div class="sidebar col1" >
-    <h1>Sidebar</h1>
+    <h1>Account</h1>
     <Past/>
     <Account/>
-    <EmptyCart/>
-    <!-- <ul>
-      <button
-        v-for="tab in tabs"
-        v-bind:key="tab.name"
-        v-bind:class="['tab-button', { active: currentTab.name === tab.name }]"
-        v-on:click =""
-        >{{ tab.name }}
-      </button>
-    </ul> -->
-    
+    <EmptyCart/> 
     <ul class = "cart">
       <li class = "" 
         v-for="(item, index) in cartItems"
@@ -21,8 +11,7 @@
         <button v-on:click="removeItem(item, index)">x</button>
       </li>
     </ul> 
-
-    <Order/>
+    <Order :total="total" :price="price"/>
   </div>
 </template>
   
@@ -37,8 +26,6 @@
     name: 'Sidebar',
     data(){
       return{
-        tabs: tabs,
-        currentTab: tabs[0]
       };
     },
     components: {
@@ -49,8 +36,13 @@
     },
     computed:{
       cartItems(){
-        var content = this.$store.getters.cart.content;
-        return content
+        return this.$store.getters.cart.content;
+      },
+      total(){
+        return this.$store.getters.cart.content.length;
+      },
+      price(){
+        return this.$store.getters.cart.total;
       }
     },
     methods: {  
@@ -70,23 +62,6 @@
     }
   }
 
-var tabs = [
-  // {
-  //   name: 'Past Orders', 
-  // },
-  // {
-  //   name: 'Order Now', 
-  // },
-  // {
-  //   name: 'Address',
-  // },
-  // {
-  //   name: 'Empty Cart', 
-  // },
-  // {
-  //   name: 'Sign In',
-  // }
-]
 </script>
 
 <style scoped>
@@ -104,6 +79,7 @@ var tabs = [
 
 li{
   list-style: none;
+  border-bottom: 1px solid black;
   /* color: white; */
 }
 

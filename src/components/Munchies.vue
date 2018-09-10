@@ -1,10 +1,10 @@
 <template>
   <keep-alive> 
     <div class="center col5">
-      <Checkout v-bind:is="checkingOut" />
+      <!-- <Checkout v-bind:is="checkingOut" />
       <UpdateInfo v-bind:is="updatingInfo" />
       <LoginForm  v-bind:is="notLoggedIn" />
-      <RegisterForm  v-bind:is="notRegistered" />
+      <RegisterForm  v-bind:is="notRegistered" /> -->
       <div id = "albumcontainer">
         <div id = "album" >
           <div
@@ -111,10 +111,9 @@
 
   #album{ 
     height: 100%;
-    width: 100%;
     overflow: scroll;
     overflow-x: hidden;
-    width: calc(100% + 1vw);
+    width: calc(100% + 17px);
     /* background-color: white; */
   }
 

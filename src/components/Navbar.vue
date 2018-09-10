@@ -7,15 +7,15 @@
     <About/>
     <Contact/> 
     <ul class = "cart">
-      <li>{{cartItems.length}}</li>
-      <li>{{total}}</li>
+      <!-- <li><p class = "totalItems">Items:</p> {{cartItems.length}}</li> -->
+      <li><p class = "totalPrice" >Total:</p> {{total}}</li>
     </ul> 
 
   </div>
 </template>
 
 <script>
-  import{mapActions} from 'vuex'
+  import {mapActions} from 'vuex'
   import Menu from './buttons/Menu'
   import Specials from './buttons/Specials'
   import Popular from './buttons/Popular'
@@ -47,17 +47,15 @@
     },
     methods: {
       ...mapActions([
-        // 'retrieveMenu'
         'retrieveMap'
       ])
     },
     created(){
-      // console.log('updateVal')
     }
   }
 </script>
 
-<style>
+<style  lang="scss" scoped>
   .nav {
     grid-column-start: 1;
     grid-column-end:   11;
@@ -70,11 +68,16 @@
   }  
 
   .cart{
-    width: auto;
+    width: 25%;
     float: right;
-  }
+    p {
+      margin: 0px;
+    }
 
-  
+    li{
+      float: right;
+    }
+  }
 
   ul{
     padding: 0px;
