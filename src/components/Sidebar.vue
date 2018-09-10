@@ -1,17 +1,19 @@
 <template>
-  <div class="sidebar col1" >
-    <h1>Account</h1>
-    <Past/>
-    <Account/>
-    <EmptyCart/> 
-    <ul class = "cart">
-      <li class = "" 
-        v-for="(item, index) in cartItems"
-        v-bind:key="item.id">{{item.name}} <br class="priceBreak"/> + {{ item.price }}
-        <button v-on:click="removeItem(item, index)">x</button>
-      </li>
-    </ul> 
-    <Order :total="total" :price="price"/>
+  <div id = "sidebarContainer">
+    <div class="sidebar col1" >
+      <h1>Account</h1>
+      <Past/>
+      <Account/>
+      <EmptyCart/> 
+      <ul class = "cart">
+        <li class = "" 
+          v-for="(item, index) in cartItems"
+          v-bind:key="item.id">{{item.name}} <br class="priceBreak"/> + {{ item.price }}
+          <button v-on:click="removeItem(item, index)">x</button>
+        </li>
+      </ul> 
+      <Order :total="total" :price="price"/>
+    </div>
   </div>
 </template>
   
@@ -87,18 +89,25 @@ a{
   text-decoration: none;
 }
 
-.sidebar{
-  /* background-color: rgb(247, 247, 247); */
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;
+#sidebarContainer{
   grid-column-start: 1;
   grid-column-end:   3;
   grid-row-start:    2;
   grid-row-end:      11;
+  overflow: hidden;
+}
+
+.sidebar{
+  /* background-color: rgb(247, 247, 247); */
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
   box-sizing: border-box;
   padding: 25px;
   /* font-size: 1vi; */
   /* background-color: rgb(255, 252, 225); */
+  overflow-y: scroll;
+  height: 100%;
+  width: calc(100% + 16px);
 }
 
 h1{
