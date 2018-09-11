@@ -95,6 +95,7 @@ a{
   grid-row-start:    2;
   grid-row-end:      11;
   overflow: hidden;
+  height: 100%;
 }
 
 .sidebar{
@@ -128,11 +129,14 @@ h1{
     display: inline;
   }
 
-  .sidebar{
+  #sidebarContainer{
     grid-column-start: 1;
     grid-column-end:   11;
     grid-row-start:    2;
     grid-row-end:      3;
+  }
+  
+  .sidebar{
   }
 
   .cart{
