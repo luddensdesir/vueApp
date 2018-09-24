@@ -6,7 +6,7 @@ import vueRresource from 'vue-resource'
 import Vuex from 'vuex'
 import VueStripeCheckout from 'vue-stripe-checkout'
 import img8 from './assets/8.jpg'
-import utils from './components/scripts/common.js'
+import utils from './scripts/common.js'
 
 Vue.config.productionTip = false
 
@@ -33,6 +33,18 @@ export const store = new Vuex.Store({
       total: 0,
       content: []
     },
+    selected: {
+      menu: true,
+      checkout: false,
+      register: false,
+      login: false,
+      update: false
+      // specials: false,
+      // popular: false,
+      // map: false,
+      // about: false,
+      // contact: false
+    },
     specials: {
       meals: [],
       items: []
@@ -42,10 +54,14 @@ export const store = new Vuex.Store({
     }
   },
   getters: {
+    selection: state => state.selected,
     menu: state => state.menu,
     cart: state => state.cart
   },
   mutations: {
+    setMainView: (state, params) => {
+      state.selected = utils.switchSelectedTab(state.selected, params)
+    },
     removeItem: (state, params) => {
       state.cart.content.splice(params.index, 1)
       state.cart.total -= makePrecise(params.item.price)
@@ -65,8 +81,10 @@ export const store = new Vuex.Store({
     },
     updateAllPrices: (state, items) => {
       state.menu.items = items
+      state.selected = utils.switchSelectedTab(state.selected, 'menu')
     },
     updateSpecials: (state, items) => {
+      state.selected = utils.switchSelectedTab(state.selected, 'menu')
       state.specials = items
     }
   },
@@ -76,7 +94,6 @@ export const store = new Vuex.Store({
         .then(function (response) {
           console.log('getMap')
           console.log(response.body)
-          // context.commit('updateSpecials', payload)
         })
     },
     updateAccountInfo: (context, payload) => {
@@ -92,6 +109,7 @@ export const store = new Vuex.Store({
       return Vue.http.get('/menu')
         .then(function (response) {
           console.log(response.body)
+          console.log('retrieveMenu')
           context.commit('updateSpecials', payload)
         })
     },
@@ -99,6 +117,7 @@ export const store = new Vuex.Store({
       return Vue.http.get('users/pastorders', {headers: utils.getAuthToken()})
         .then(function (response) {
           console.log(response.body)
+          console.log('getPastOrders')
           context.commit('updateSpecials', payload)
         })
     },
@@ -106,6 +125,7 @@ export const store = new Vuex.Store({
       return Vue.http.get('/popular')
         .then(function (response) {
           console.log(response.body)
+          console.log('retrievePopularOrders')
           context.commit('updateSpecials', payload)
         })
     },
@@ -119,6 +139,7 @@ export const store = new Vuex.Store({
     retrieveMainMenu: (context) => {
       return Vue.http.get('/menu/all')
         .then(function (response) {
+          console.log('retrieveMainMenu')
           console.log(response.body)
           context.commit('updateAllPrices', response.body)
         })
@@ -126,14 +147,13 @@ export const store = new Vuex.Store({
     retrieveSpeciallist: (context, payload) => {
       return Vue.http.get('menu/specials')
         .then(function (response) {
+          console.log('retrieveSpeciallist')
           console.log(response.body)
           // context.commit('')
         })
     },
     removeFromCart: (context, payload) => {
       context.commit('removeItem', payload)
-    },
-    changeValue: (context, payload) => {
     }
   }
 })

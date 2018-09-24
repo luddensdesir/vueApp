@@ -51,6 +51,10 @@
 
 <style>
   #checkout{
-
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 50%;
   }
 </style>

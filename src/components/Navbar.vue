@@ -7,7 +7,6 @@
     <About/>
     <Contact/> 
     <ul class = "cart">
-      <!-- <li><p class = "totalItems">Items:</p> {{cartItems.length}}</li> -->
       <li><p class = "totalPrice" >Total:</p> {{total}}</li>
     </ul> 
 

@@ -90,7 +90,8 @@ button{
   // background-color: rgb(255, 252, 225);
 }
 #app {
-  width: calc(35% + 520px);
+  // width: calc(35% + 520px);
+  width: calc(980px);
   // width: 35%;
   height: 100%;
   margin:auto;
@@ -114,7 +115,7 @@ body, html{
 }
 
 
-@media(max-width: 820px){
+@media(max-width: 960px){
   #app {
     width: 100%;
   }

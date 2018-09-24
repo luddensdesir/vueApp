@@ -1,6 +1,6 @@
 <template>
-  <button id="orderButton" class="tab-button">
-    {{total}} items for {{price}}!<br/>
+  <button id="orderButton" class="tab-button"  v-on:click="setMainToCheckout">
+    {{total}} items for ${{price}}<br/>
     Checkout 
   </button>
 </template>
@@ -15,7 +15,10 @@
     },
     computed:{
     },
-    methods: {  
+    methods: {
+      setMainToCheckout(){
+        this.$store.commit('setMainView', 'checkout')
+      }
     },
     created(){
     }

@@ -2,6 +2,16 @@ export default {
   setAuthToken (token) {
     localStorage.setItem('loginToken', JSON.stringify(token))
   },
+  switchSelectedTab (tabs, selected) {
+    for (const key in tabs) {
+      if (key === selected) {
+        tabs[key] = true
+      } else {
+        tabs[key] = false
+      }
+    }
+    return tabs
+  },
   getAuthToken () {
     return {token: localStorage.getItem('loginToken')}
   },

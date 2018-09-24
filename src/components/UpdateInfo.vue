@@ -1,15 +1,13 @@
 <template>
-  <div class="updateInfo"> 
-    <form id = "personalInfo" class ="signinForm" v-on:submit.stop.prevent="updatePersonalInfo">
-      <input type="text" maxlength="50" class="" placeholder="name" name="name">
-      <input type="text" maxlength="50" class = "address" placeholder="address" name="address">
-      <button type="Submit" class="button btn btn-default">[confirm update]</button>
-    </form>
-  </div>
+  <form id = "updateInfo" class ="signinForm" v-on:submit.stop.prevent="updatePersonalInfo">
+    <input type="text" maxlength="50" class="" placeholder="name" name="name">
+    <input type="text" maxlength="50" class = "address" placeholder="address" name="address">
+    <button type="Submit" class="button btn btn-default">[confirm update]</button>
+  </form>
 </template>
 
 <script> 
-  import utils from './scripts/common.js'
+  import utils from '../scripts/common.js'
   export default {
     name: 'UpdateInfo', 
     data(){
@@ -36,4 +34,11 @@
 </script>
 
 <style>
+  #updateInfo{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 50%;
+  }
 </style>
