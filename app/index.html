@@ -1,14 +1,14 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>app</title><link href=/static/css/app.23a632e885756b19da4953d87a3ac3b9.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.f2d7ee973c461b05a0b7.js></script><script type=text/javascript src=/static/js/app.240cb09c08bb7ce30a1f.js></script></body><script type=text/javascript>function initMap() {
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>app</title><link href=/static/css/app.2a6a6dbe7463b47ffd1f0d5045770f00.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.f2d7ee973c461b05a0b7.js></script><script type=text/javascript src=/static/js/app.30f0bf4cc3d89209e560.js></script></body><script type=text/javascript>function initMap() {
         var loc = {lat: 34.0782, lng: -118.2606}
         // console.log(google.maps.places)
 
-        // var complete = new google.maps.places.Autocomplete(
-        //   (document.getElementById('locInput')), {
-        //       types: ['geocode']
-        //       // location: {lattitude: loc.lat, longitude: loc.lng},
-        //       // radius: 4828.03
-        //     // components
-        //   });
+        var complete = new google.maps.places.Autocomplete(
+          (document.getElementById('locInput')), {
+              types: ['geocode']
+              // location: {lattitude: loc.lat, longitude: loc.lng},
+              // radius: 4828.03
+            // components
+          });
 
         var map = new google.maps.Map(document.getElementById('gMap'), {
           zoom: 4,

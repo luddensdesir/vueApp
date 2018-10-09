@@ -6,6 +6,7 @@
       <LoginForm  v-if="notLoggedIn" />
       <RegisterForm  v-if="notRegistered" />
       <Main  v-if="viewingMenu" />
+      <Map v-if="viewingMap" />
     </div>
   </keep-alive>
 </template>
@@ -17,10 +18,11 @@
   import RegisterForm from './RegisterForm'
   import Main from './Main'
   import Checkout from './Checkout'
+  import Map from './Map'
 
   export default {
     name: 'Munchies',
-    components: { UpdateInfo, Checkout, RegisterForm , LoginForm, Main },
+    components: { UpdateInfo, Checkout, RegisterForm, Map, LoginForm, Main },
     computed: {
         checkingOut(){
           var val = this.$store.getters.selection
@@ -37,6 +39,10 @@
         viewingMenu(){
           var val = this.$store.getters.selection
           return val['menu'];
+        },
+        viewingMap(){
+          var val = this.$store.getters.selection
+          return val['map'];
         },
         updatingInfo(){
           var val = this.$store.getters.selection

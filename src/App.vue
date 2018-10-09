@@ -3,7 +3,6 @@
     <Sidebar/>
     <Navbar/>
     <Munchies/>
-    <!-- <Map/> -->
     <!-- <Contact/> -->
   </div >
 </template>
@@ -13,7 +12,6 @@
   import Sidebar from './components/Sidebar'
   import Munchies from './components/Munchies'
   import Contact from './components/Contact'
-  import Map from './components/Map'
 
   export default {
     name: 'App',
@@ -23,7 +21,7 @@
         value: '0',
       };
     },
-    components: { Navbar, Sidebar, Munchies, Map, Contact},
+    components: { Navbar, Sidebar, Munchies, Contact},
     computed: {
       cart(){
         return this.$store.getters.cart;

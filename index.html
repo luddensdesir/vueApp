@@ -13,13 +13,13 @@
         var loc = {lat: 34.0782, lng: -118.2606}
         // console.log(google.maps.places)
 
-        // var complete = new google.maps.places.Autocomplete(
-        //   (document.getElementById('locInput')), {
-        //       types: ['geocode']
-        //       // location: {lattitude: loc.lat, longitude: loc.lng},
-        //       // radius: 4828.03
-        //     // components
-        //   });
+        var complete = new google.maps.places.Autocomplete(
+          (document.getElementById('locInput')), {
+              types: ['geocode']
+              // location: {lattitude: loc.lat, longitude: loc.lng},
+              // radius: 4828.03
+            // components
+          });
 
         var map = new google.maps.Map(document.getElementById('gMap'), {
           zoom: 4,

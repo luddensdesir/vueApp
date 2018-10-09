@@ -90,7 +90,7 @@ app.use(function (req, res, next) {
 app.use(cors())
 
 
-// app.use('/', main);
+app.use('/', main);
 app.use('/menu', menu); 
 app.use('/users', users); 
 app.use('/checkout', checkout); 

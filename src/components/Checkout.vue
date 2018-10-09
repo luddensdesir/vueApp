@@ -1,8 +1,10 @@
 
 <template>
   <div id="checkout">
-    <button @click="stripecheckout">Pay With Card</button>
-    <button @click="ppcheckout">PayPal</button>
+    <div>
+      <button @click="stripecheckout">Pay With Card</button>
+      <button @click="ppcheckout">PayPal</button>
+    </div>
   </div>
 </template> 
 
@@ -49,12 +51,21 @@
  
 </script>
 
-<style>
+<style lang ="scss">
   #checkout{
     background-color: white;
     width: 100%;
     height: 100%;
     text-align: center;
-    padding-top: 50%;
+    div{
+      top: 0px;
+      left: 0px;
+      bottom: 0px;
+      right: 0px;
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+      /* transform: translate(0%, -50%); */
+    }
   }
 </style>

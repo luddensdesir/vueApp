@@ -25,7 +25,7 @@
 
 <style>
   #gMap{
-    width: 100vh; 
-    height: 600px;
+    width: 100%; 
+    height: 100%;
   }
 </style>

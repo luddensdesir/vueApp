@@ -15,7 +15,7 @@
     },
     methods: {
       getMapData(){
-        this.$store.dispatch('getMapData')
+        this.$store.dispatch('getMapData', 'map')
       }
     },
     created(){

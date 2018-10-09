@@ -3,6 +3,7 @@ export default {
     localStorage.setItem('loginToken', JSON.stringify(token))
   },
   switchSelectedTab (tabs, selected) {
+    console.log(selected)
     for (const key in tabs) {
       if (key === selected) {
         tabs[key] = true

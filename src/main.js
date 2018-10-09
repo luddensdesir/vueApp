@@ -34,10 +34,12 @@ export const store = new Vuex.Store({
       content: []
     },
     selected: {
+      // menu: true,
       menu: true,
       checkout: false,
       register: false,
       login: false,
+      map: false,
       update: false
       // specials: false,
       // popular: false,
@@ -60,6 +62,9 @@ export const store = new Vuex.Store({
   },
   mutations: {
     setMainView: (state, params) => {
+      state.selected = utils.switchSelectedTab(state.selected, params)
+    },
+    setupMap: (state, params) => {
       state.selected = utils.switchSelectedTab(state.selected, params)
     },
     removeItem: (state, params) => {
@@ -94,6 +99,7 @@ export const store = new Vuex.Store({
         .then(function (response) {
           console.log('getMap')
           console.log(response.body)
+          context.commit('setupMap', payload)
         })
     },
     updateAccountInfo: (context, payload) => {
