@@ -94,6 +94,24 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
+    setMainView: (context, payload) => {
+      context.commit('setMainView', payload)
+    },
+    emptyCart: (context, payload) => {
+      context.commit('emptyCart', payload)
+    },
+    updateAddress: (context, payload) => {
+      context.commit('emptyCart', payload)
+    },
+    // setMainView: (context, payload) => {
+    //   context.commit('setMainView', payload)
+    // },
+    // setMainView: (context, payload) => {
+    //   context.commit('setMainView', payload)
+    // },
+    // setMainView: (context, payload) => {
+    //   context.commit('setMainView', payload)
+    // },
     getMapData: (context, payload) => {
       return Vue.http.get('/getmap')
         .then(function (response) {

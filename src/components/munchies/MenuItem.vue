@@ -1,6 +1,6 @@
 <template>
   <div class = "purchase">
-    <div class = "pButton $color4" @click="addToCart($event, tab)">
+    <div class = "pButton $color4 anim" @click="addToCart($event, tab)">
       <span>Add {{ tab.name }} To Cart, For {{ tab.price}}</span>
     </div>
   </div>
@@ -29,23 +29,40 @@
 
 </script>
 
-<style scoped> 
-
+<style scoped lang="scss"> 
+$shadowDist: 10px;
   .purchase{
     float: right;
     right: 0%;
     height: 100%;
     width: 20%;
+    margin: auto;
+    text-align: center;
   }
 
+.pButton:hover .purchase{
+  background-color: black;
+}
+
+.pButton:hover {
+  background-color: black;
+  color: white;
+  /* height: 2.5em; */
+  transform: translate(-$shadowDist, calc(-50% -$shadowDist));
+
+  box-shadow: $shadowDist $shadowDist rgb(155, 155, 155);
+}
+
   .pButton{
-    height: 75%;
     width: 75%;
-    margin-right: auto;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    margin-left: auto;
+    background-color: rgb(255, 102, 102);
+    border: 1px solid black;
+    border-radius: 2.5px;
+    padding: 2.5px;
+    margin: auto;
   }
 
   @media(max-width: 840px){

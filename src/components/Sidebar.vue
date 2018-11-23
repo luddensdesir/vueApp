@@ -1,33 +1,32 @@
 <template>
   <div id = "sidebarContainer">
     <div class="sidebar col1" >
-      <Login/>
-      <Update/>
-      <Register/>
-      <h3>Account</h3>
-      <Past/>
-      <Account/>
-      <EmptyCart/> 
-      <ul class = "cart">
-        <li class = "" 
-          v-for="(item, index) in cartItems"
-          v-bind:key="item.id"><span>{{item.name}}<br class="priceBreak"/>+{{item.price}}</span><div class = "buttons"><button class = "updateItem" >Update</button><button class = "removeItem" v-on:click="removeItem(item, index)">x</button><div class = "clear"></div></div>
-        </li>
-      </ul> 
-      <Order :total="total" :price="price"/>
+      <div @mouseout="testfunc" >
+        <!-- give login button a top obrder and use the event above to cause some kind of color animation -->
+        <div id = "mainButtons">
+          <GenButton :name="'Login'" :func="'setMainView'" :param="'login'"/>
+          <GenButton :name="'Update'" :func="'setMainView'" :param="'update'" />
+          <GenButton :name="'Register'" :func="'setMainView'" :param="'register'"/>
+          <GenButton :name="'Account'" :func="'updateAddress'"/>
+          <GenButton :name="'Past Orders'" :func="'getPastOrders'"/>
+          <GenButton :name="'Empty Cart'" :func="'emptyCart'"/>
+        </div>
+        <ul class = "cart">
+          <li class = "" 
+            v-for="(item, index) in cartItems"
+            v-bind:key="item.id"><span>{{item.name}}<br class="priceBreak"/>+{{item.price}}</span><div class = "buttons"><button class = "updateItem" >Modify</button><button class = "removeItem" v-on:click="removeItem(item, index)">x</button><div class = "clear"></div></div>
+          </li>
+          <Order :name="'Order'" :func="'setMainView'" :param="'checkout'" :total="total" :price="price"/>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
   
 <script>
   import{mapActions} from 'vuex'
+  import GenButton from './buttons/genButton'
   import Order from './buttons/Order'
-  import Past from './buttons/Past'
-  import Account from './buttons/Account'
-  import EmptyCart from './buttons/EmptyCart'
-  import Register from './buttons/Register'
-  import Login from './buttons/Login'
-  import Update from './buttons/Update'
 
   export default {
     name: 'Sidebar',
@@ -37,12 +36,7 @@
       };
     },
     components: {
-      Past,
-      Account,
-      EmptyCart,
-      Register,
-      Login,
-      Update,
+      GenButton,
       Order
     },
     computed:{
@@ -66,7 +60,10 @@
         this.renderLists = 1;
       }
     },
-    methods: {  
+    methods: {
+      testfunc: function(){
+        console.log('test')
+      },
       getSpecialMenu: function(){
         console.log("retrieveSpecialist")
           this.$store.dispatch('retrieveSpecialist')
@@ -96,6 +93,9 @@
   
 ul{
   padding: 0px;
+  height: 50px;
+  //fix this;
+  //figure out li height, then do stuff
 }
 
 .cart li{
@@ -104,11 +104,12 @@ ul{
 
 .buttons{
   width: 100%;
-  background-color: #E5E5E5;
+  background-color: #A0DDFA;
   height: auto;
 }
 .buttons button{
   box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .removeItem{
@@ -118,12 +119,17 @@ ul{
   float: left;
 }
 
+#mainButtons button:hover{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .clear{
   clear: both;
 }
 
 span{
-  text-align: center;
+  // text-align: center;
 }
 
 li{
@@ -131,7 +137,7 @@ li{
   list-style: none;
   border-bottom: 1px solid black;
   line-height: 1em;
-  text-align: center;
+  // text-align: center;
 }
 
 a{

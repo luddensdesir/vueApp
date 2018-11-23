@@ -42,6 +42,13 @@ $color3: lighten($color, 45);
 $color4: darken(adjust-hue($color1, 240), 10);
 $color5: $color;
 
+.anim{
+  -webkit-transition: all .5s; 
+     -moz-transition: all .5s;
+       -o-transition: all .5s;
+          transition: all .5s;  
+}
+
 input{
   background-color: $color3;
   border: 0px;
@@ -69,10 +76,28 @@ input{
   background-color: $color5;
 }
 
+button:hover{
+  color:white;
+  background-color:black;
+  border-color:white;
+}
+
+.cart button:hover{
+  background-color:unset;
+}
+
 button{
   background-color: $color4;
   border: 0px;
   border-left: 3px solid black;
+  box-sizing: border-box;
+  background-color: rgb(255, 102, 102);
+}
+
+textarea:focus, input:focus, button:focus{
+    outline: 0px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .center {

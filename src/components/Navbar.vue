@@ -1,36 +1,27 @@
 <template>
   <div class="nav col1">
-    <Menu/>
-    <Specials/>
-    <Popular/>
-    <MapInfo/>
-    <About/>
-    <Contact/> 
-    <ul class = "cart">
-      <li><p class = "totalPrice" >Total:</p> {{total}}</li>
-    </ul> 
-
+    <GenButton :name="'Menu'" :func="'retrieveMainMenu'"/>
+    <GenButton :name="'Specials'" :func="'retrieveSpeciallist'" />
+    <GenButton :name="'Popular'" :func="'retrievePopularMenu'"/>
+    <GenButton :name="'MapInfo'" :func="'getMapData'" :param="'map'"/>
+    <GenButton :name="'About'" :func="'placeholder'"/>
+    <GenButton :name="'Contact'" :func="'placeholder'"/>
+    <div  class = "cart">
+      <ul class = "">
+        <li><p class = "totalPrice" >Total:</p> {{total}}</li>
+      </ul> 
+    </div>
   </div>
 </template>
 
 <script>
   import {mapActions} from 'vuex'
-  import Menu from './buttons/Menu'
-  import Specials from './buttons/Specials'
-  import Popular from './buttons/Popular'
-  import About from './buttons/About'
-  import MapInfo from './buttons/MapInfo'
-  import Contact from './buttons/Contact'
+  import GenButton from './buttons/genButton'
 
   export default {
     name: 'Navbar',
     components: {
-      Menu,
-      Specials,
-      Popular,
-      About,
-      MapInfo,
-      Contact
+      GenButton
     },
     data(){
       return{
@@ -66,6 +57,11 @@
     box-sizing: border-box;
   }  
 
+  button:hover{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   .cart{
     width: 25%;
     float: right;
@@ -73,8 +69,10 @@
       margin: 0px;
     }
 
-    li{
+    ul{
+      width: auto;
       float: right;
+      transition: all 0.5s ease;
     }
   }
 
