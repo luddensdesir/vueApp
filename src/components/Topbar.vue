@@ -22,7 +22,7 @@
   import GenButton from './buttons/genButton'
 
   export default {
-    name: 'Navbar',
+    name: 'Topbar',
     components: {
       GenButton
     },

@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <Sidebar/>
-    <Navbar/>
+    <!-- <Sidebar/>
+    <Topbar/> -->
     <Munchies/>
+    <Nav :type="'menu'" :dir="'horizontal'"/>
+    <Nav :type="'profile'" :dir="'vertical'"/>
     <!-- <Contact/> -->
   </div >
 </template>
 
 <script>
-  import Navbar from './components/Navbar'
+  import Topbar from './components/Topbar'
   import Sidebar from './components/Sidebar'
   import Munchies from './components/Munchies'
+  import Nav from './components/Nav'
   import Contact from './components/Contact'
 
   export default {
@@ -21,7 +24,7 @@
         value: '0',
       };
     },
-    components: { Navbar, Sidebar, Munchies, Contact},
+    components: { Nav, Topbar, Sidebar, Munchies, Contact},
     computed: {
       cart(){
         return this.$store.getters.cart;

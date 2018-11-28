@@ -1,8 +1,9 @@
 <template>
   <div id = "sidebarContainer">
     <div class="sidebar col1" >
-      <div @mouseout="testfunc" >
+      <div @mouseenter="addClassesToAll($event)"  @mouseleave="removeColorClass($event)">
         <!-- give login button a top obrder and use the event above to cause some kind of color animation -->
+        <!-- this shuld effect all child elements, perhaps except for the checkout -->
         <div id = "mainButtons">
           <GenButton :name="'Login'" :func="'setMainView'" :param="'login'"/>
           <GenButton :name="'Update'" :func="'setMainView'" :param="'update'" />
@@ -61,15 +62,21 @@
       }
     },
     methods: {
-      testfunc: function(){
-        console.log('test')
+      addClassesToAll: function($event){
+        var all = $event.target.children[0].children
+        for (var i = 0; i < all.length; i++) {
+            all[i].classList.add('contrast');
+        }
+      },
+      removeColorClass: function($event){
+        var all = $event.target.children[0].children
+        for (var i = 0; i < all.length; i++) {
+            all[i].classList.remove('contrast');
+        }
       },
       getSpecialMenu: function(){
         console.log("retrieveSpecialist")
           this.$store.dispatch('retrieveSpecialist')
-      },
-      testFunc: function(){
-        console.log('test')
       },
       removeItem: function(item, index){
         var args = {item, index}
@@ -87,6 +94,9 @@
   width:100%;
 }
 
+.contrast{
+  background-color: white;
+}
 .priceBreak{
   /* display: none; */
 }

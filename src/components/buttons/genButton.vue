@@ -1,6 +1,6 @@
 <template>
   <!-- parameterize the id -->
-  <button id="" class="tab-button anim" v-on:click="execute(func, param)">
+  <button  @mouseenter="addColorClass($event)"  @mouseleave="removeColorClass($event)" id="" class="tab-button anim" v-on:click="execute(func, param)">
     {{name}}
   </button>
 </template>
@@ -16,6 +16,15 @@
     computed:{
     },
     methods: {
+      addColorClass($event){
+        var target = $event.target
+        
+        target.classList.add('lock')
+      },
+      removeColorClass($event){
+        var target = $event.target
+        target.classList.remove('lock')
+      },
       execute(func, param){
         this.$store.dispatch(func, param)
       }
@@ -25,5 +34,8 @@
   }
 </script>
 
-<style scoped> 
+<style scoped>
+  .lock{
+    background-color:black;
+  }
 </style>
