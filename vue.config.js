@@ -1,10 +1,13 @@
+const path = require('path');
+
 module.exports = {
+  outputDir: path.resolve(__dirname, './app'),
   configureWebpack: {
     plugins: [
     ],
     resolve: {
       symlinks: false
-    }
+    },
   },  
   devServer: { //https://cli.vuejs.org/config/#devserver-proxy //https://cli.vuejs.org/guide/webpack.html#simple-configuration
     host: 'localhost',

@@ -56,11 +56,11 @@ if(!process.env.HEROKU){
 app.get('/', function (req, res) { 
   //for the initial connect
   console.log('__!!getting index!!__')
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
+  res.sendFile(path.join(__dirname + '/app/index.html'));
 })
 
 //for serving images and the client side javascript
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'app')));
 
 app.use(passport.initialize());
 app.use(passport.session());
