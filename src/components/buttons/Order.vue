@@ -4,8 +4,10 @@
   </div>
 </template>
   
+  
+<!--<script lang="ts">-->
 <script>
-  import GenButton from './genButton'
+  import GenButton from './genButton.vue'
   export default {
     name: 'Order',
     props: ['total', 'price'],
@@ -19,7 +21,7 @@
     computed:{
     },
     methods: {
-      setMainToCheckout(){
+      setMainToCheckout:function(){
         this.$store.commit('setMainView', 'checkout')
       }
     },
@@ -29,7 +31,7 @@
 
 </script>
 
-<style scoped> 
+<style lang ="scss" scoped>
   #checkoutButton button{
     width: 100%;
   }

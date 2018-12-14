@@ -14,8 +14,9 @@
     </div>
 </template>
 
-<script>  
-  import MenuItem from './munchies/MenuItem'
+<!--<script lang ="ts"> -->
+<script>
+  import MenuItem from './munchies/MenuItem.vue'
   import img1 from "../assets/1.jpg"
   import img2 from "../assets/2.jpg"
   import img3 from "../assets/3.jpg"
@@ -35,7 +36,7 @@
       };
     },
     methods: {
-      submitRegistration(ev){
+      submitRegistration:function(ev){
         var formData = this.formToJson(ev.target)
         console.log(formData)
         this.$http.post('users/register', formData)
@@ -48,8 +49,10 @@
       }
     },
     computed:{
-      menuItems(){
+      menuItems:function(){
         var menu = this.$store.getters.menu; 
+
+        console.log(menu)
         
         //this is bad. i should feel bad
         for(var i = 0; i < menu.items.length; i++){
@@ -88,7 +91,7 @@
    tabs.push(setImages(img8, 'grilledcheese'))
 </script>
 
-<style>
+<style lang="scss" scoped>
   #mainContainer{
     overflow:hidden;
     width:100%;

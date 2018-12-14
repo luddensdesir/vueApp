@@ -10,7 +10,8 @@
   </div>
 </template>
 
-<script> 
+<!--<script lang ="ts"> -->
+<script>
   export default {
     name: 'LoginForm', 
     data(){
@@ -20,7 +21,7 @@
     computed:{ 
     },
     methods: {
-      login(ev){
+      login:function(ev){
         var creds = { 
             username: ev.target.children[0].value,
             password: ev.target.children[1].value

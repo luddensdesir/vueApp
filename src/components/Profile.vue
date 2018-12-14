@@ -19,11 +19,12 @@
     </ul>
   </div>
 </template>
-  
+
+<!--<script lang ="ts"> -->
 <script>
   import{mapActions} from 'vuex'
-  import GenButton from './buttons/genButton'
-  import Order from './buttons/Order'
+  import GenButton from './buttons/genButton.vue'
+  import Order from './buttons/Order.vue'
 
   export default {
     name: 'Profile',

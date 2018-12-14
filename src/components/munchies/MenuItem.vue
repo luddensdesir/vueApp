@@ -6,7 +6,7 @@
   </div>
 </template>
   
-<script>
+<script lang="ts">
   export default {
     props: ['tab'],
     name: 'MenuItem',
@@ -17,7 +17,7 @@
     computed:{
     },
     methods: { 
-      addToCart: function($event, newItem){
+      addToCart : function($event, newItem){
         var date = new Date().getTime();
         newItem.date = date;
         this.$store.commit('addToCart',newItem)

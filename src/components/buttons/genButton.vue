@@ -5,6 +5,7 @@
   </button>
 </template>
   
+<!--<script lang="ts">-->
 <script>
   export default {
     name: 'genButton',
@@ -16,16 +17,16 @@
     computed:{
     },
     methods: {
-      addColorClass($event){
+      addColorClass : function($event){
         var target = $event.target
         
         target.classList.add('lock')
       },
-      removeColorClass($event){
+      removeColorClass : function($event){
         var target = $event.target
         target.classList.remove('lock')
       },
-      execute(func, param){
+      execute : function(func, param){
         this.$store.dispatch(func, param)
       }
     },
@@ -34,7 +35,7 @@
   }
 </script>
 
-<style scoped>
+<style lang ="scss" scoped>
   .lock{
     background-color:black;
   }

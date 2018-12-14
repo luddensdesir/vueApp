@@ -8,11 +8,12 @@
   </div>
 </template> 
 
-<script>  
+<!--<script lang ="ts"> -->
+<script>
   export default {
     name: 'Checkout',
     methods: {
-      ppcheckout() {
+      ppcheckout:function() {
         this.$http.post('checkout/paypal')
           .then(function(res){
             var height = 680 + 'px'
@@ -23,7 +24,7 @@
         
           })  
       },
-      stripecheckout() {
+      stripecheckout:function() {
         // this.$checkout.close() 
         // is also available.
         
@@ -41,7 +42,7 @@
       }
     },
     computed:{
-      cartItems(){
+      cartItems:function(){
         return this.$store.getters.cart.content;
       }, 
     },

@@ -10,8 +10,9 @@
   </div>
 </template>
 
-<script> 
-  import utils from '../scripts/common.js'
+<!--<script lang ="ts"> -->
+<script>
+  import utils from '../scripts/utils.js'
   export default {
     name: 'UpdateInfo', 
     data(){
@@ -19,15 +20,15 @@
       };
     },
     computed:{
-      cartItems(){
+      cartItems:function(){
         return this.$store.getters.cart.content;
       },
-      total(){
+      total:function(){
         return this.$store.getters.cart.total;
       }
     },
     methods: {
-      updatePersonalInfo(ev){
+      updatePersonalInfo: function(ev){
         var formData = utils.formToJson(ev.target)
         this.$store.dispatch('updateAccountInfo', {newUserInfo:formData, headers: utils.getAuthToken()})
       },

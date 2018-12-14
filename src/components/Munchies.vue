@@ -11,40 +11,41 @@
   </keep-alive>
 </template>
 
+<!--<script lang ="ts"> -->
 <script>
-  import utils from '../scripts/common.js'
-  import UpdateInfo from './UpdateInfo'
-  import LoginForm from './LoginForm'
-  import RegisterForm from './RegisterForm'
-  import Main from './Main'
-  import Checkout from './Checkout'
-  import Map from './Map'
+  import utils from '../scripts/utils.js'
+  import UpdateInfo from './UpdateInfo.vue'
+  import LoginForm from './LoginForm.vue'
+  import RegisterForm from './RegisterForm.vue'
+  import Main from './Main.vue'
+  import Checkout from './Checkout.vue'
+  import Map from './Map.vue'
 
   export default {
     name: 'Munchies',
     components: { UpdateInfo, Checkout, RegisterForm, Map, LoginForm, Main },
     computed: {
-        checkingOut(){
+        checkingOut:function(){
           var val = this.$store.getters.selection
           return val['checkout'];
         },
-        notRegistered(){
+        notRegistered:function(){
           var val = this.$store.getters.selection
           return val['register'];
         },
-        notLoggedIn(){
+        notLoggedIn:function(){
           var val = this.$store.getters.selection
           return val['login'];
         },
-        viewingMenu(){
+        viewingMenu:function(){
           var val = this.$store.getters.selection
           return val['menu'];
         },
-        viewingMap(){
+        viewingMap:function(){
           var val = this.$store.getters.selection
           return val['map'];
         },
-        updatingInfo(){
+        updatingInfo:function(){
           var val = this.$store.getters.selection
           return val['update'];
         }

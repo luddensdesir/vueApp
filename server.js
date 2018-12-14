@@ -16,7 +16,7 @@ var cors = require('cors');
 var keys = require('./apiKeys.js');
 var targetConnection = keys.MONGODB_URI
   
-var options = { keepAlive: 300000, connectTimeoutMS: 30000, autoIndex:false }
+var options = { useNewUrlParser: true, keepAlive: 300000, connectTimeoutMS: 30000, autoIndex:false }
 
 let dbConnection = mongoose.connect(targetConnection, options, function(err, db){
   // console.log(db)
@@ -56,11 +56,11 @@ if(!process.env.HEROKU){
 app.get('/', function (req, res) { 
   //for the initial connect
   console.log('__!!getting index!!__')
-  res.sendFile(path.join(__dirname + '/app/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
 })
 
 //for serving images and the client side javascript
-app.use(express.static(path.join(__dirname, 'app')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(passport.initialize());
 app.use(passport.session());

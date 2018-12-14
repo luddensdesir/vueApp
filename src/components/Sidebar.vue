@@ -23,11 +23,12 @@
     </div>
   </div>
 </template>
-  
+
+<!--<script lang ="ts"> -->
 <script>
   import{mapActions} from 'vuex'
-  import GenButton from './buttons/genButton'
-  import Order from './buttons/Order'
+  import GenButton from './buttons/genButton.vue'
+  import Order from './buttons/Order.vue'
 
   export default {
     name: 'Sidebar',
@@ -41,17 +42,17 @@
       Order
     },
     computed:{
-      cartItems(){
+      cartItems:function(){
         return this.$store.getters.cart.content;
       },
-      total(){
+      total:function(){
         return this.$store.getters.cart.content.length;
       },
-      price(){
+      price:function(){
         return this.$store.getters.cart.total;
       }
     },
-    beforeUpdate(){
+    beforeUpdate:function(){
       const len = this.cartItems.length;
       if(len > 5){
         this.renderLists = 2;

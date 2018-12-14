@@ -17,9 +17,10 @@
   </div>
 </template>
 
+<!--<script lang ="ts"> -->
 <script>
   import {mapActions} from 'vuex'
-  import GenButton from './buttons/genButton'
+  import GenButton from './buttons/genButton.vue'
 
   export default {
     name: 'Navbar',

@@ -7,12 +7,13 @@
         <Menu />
     </div>
 </template>
-  
+
+<!--<script lang ="ts"> -->
 <script>
 //   import Sidebar from './Sidebar'
 //   import Topbar from './Topbar'
-  import Profile from './Profile'
-  import Menu from './Menu'
+  import Profile from './Profile.vue'
+  import Menu from './Menu.vue'
 
   export default {
     name: 'Nav',
@@ -199,6 +200,8 @@
 
     button{
       padding: 3px;
+      margin-left: 3px;
+      margin-right: 3px;
     }
     .totalCart{
       width: 25%;

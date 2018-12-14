@@ -9,12 +9,13 @@
   </div >
 </template>
 
+<!--<script lang ="ts"> -->
 <script>
-  import Topbar from './components/Topbar'
-  import Sidebar from './components/Sidebar'
-  import Munchies from './components/Munchies'
-  import Nav from './components/Nav'
-  import Contact from './components/Contact'
+  import Topbar from './components/Topbar.vue'
+  import Sidebar from './components/Sidebar.vue'
+  import Munchies from './components/Munchies.vue'
+  import Nav from './components/Nav.vue'
+  import Contact from './components/Contact.vue'
 
   export default {
     name: 'App',
@@ -26,7 +27,7 @@
     },
     components: { Nav, Topbar, Sidebar, Munchies, Contact},
     computed: {
-      cart(){
+      cart : function(){
         return this.$store.getters.cart;
       }
     },
@@ -146,4 +147,25 @@ body, html{
     width: 100%;
   }
 }
+
+
+@media(max-width: 840px){
+  img{
+    height: auto;
+    width: 100%;
+  }    
+}
+@media(max-width: 640px){
+  img{
+    /* height: auto; */
+    /* width: 100%; */
+  } 
+  .center {
+    grid-column-start: 1;
+    grid-column-end:   11;
+    grid-row-start:    3;
+    grid-row-end:      11;
+  }
+}
+
 </style>

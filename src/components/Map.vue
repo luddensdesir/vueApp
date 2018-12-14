@@ -4,8 +4,8 @@
   </div>
 </template> 
 
-<script>  
-  
+<!--<script lang ="ts"> -->
+<script>
   export default {
     name: 'Map',
     methods: {
@@ -23,7 +23,7 @@
 
 </script>
 
-<style>
+<style lang="scss" scoped>
   #gMap{
     width: 100%; 
     height: 100%;

@@ -13,7 +13,8 @@
   </div>
 </template>
 
-<script> 
+<!--<script lang ="ts"> -->
+<script>
   export default {
     name: 'registerForm', 
     data(){
@@ -21,10 +22,10 @@
       };
     },
     computed:{
-      cartItems(){
+      cartItems:function(){
         return this.$store.getters.cart.content;
       },
-      total(){
+      total:function(){
         return this.$store.getters.cart.total;
       }
     },

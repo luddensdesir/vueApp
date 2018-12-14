@@ -11,12 +11,13 @@
   </div>
 </template>
 
+<!--<script lang ="ts"> -->
 <script>
   export default {
   }
 </script>
 
-<style>
+<style lang ="scss">
   .contact{
     background-color: red;
   }
