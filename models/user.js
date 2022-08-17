@@ -1,6 +1,7 @@
-var mongoose = require('mongoose')
-var bcrypt = require('bcryptjs')
-var handler = require('../handler')
+var mongoose = require("mongoose");
+// var bcrypt = require("bcryptjs");
+const { scryptSync, randomBytes } = require("crypto");
+var handler = require("../handler");
 // var bodyParser = require('body-parser')
 
 // User Schema
@@ -33,23 +34,25 @@ var UserSchema = mongoose.Schema({
   paymentPaypal: {
     type: String
   }
-})
+});
 
-const User = mongoose.model('User', UserSchema)
+const User = mongoose.model("User", UserSchema);
 
-module.exports = User
+module.exports = User;
 
 module.exports.createUser = function (newUser, callback) {
-  bcrypt.genSalt(10, function (err, salt) {
-    if (err) { handler(err) }
+  //replace with https://stackoverflow.com/questions/19822643/what-is-an-alternative-for-bcrypt-to-use-with-node
+  
+  // bcrypt.genSalt(10, function (err, salt) {
+  //   if (err) { handler(err); }
 
-    bcrypt.hash(newUser.password, salt, function (err, hash) {
-      if (err) { handler(err) }
-      newUser.password = hash
-      newUser.save(callback)
-    })
-  })
-}
+  //   bcrypt.hash(newUser.password, salt, function (err, hash) {
+  //     if (err) { handler(err); }
+  //     newUser.password = hash;
+  //     newUser.save(callback);
+  //   });
+  // });
+};
 
 // module.exports.findUser = function (username, callback) {
 //   var query = {username: username}
@@ -57,8 +60,8 @@ module.exports.createUser = function (newUser, callback) {
 // }
 
 module.exports.getUserByUsername = function (username, callback) {
-  User.findOne({username: username}, callback)
-}
+  User.findOne({username: username}, callback);
+};
 
 // //not sure if either of these are the best way to do it, taking the whole thing and replacing the whole thing, but i dont care right now
 // module.exports.updateUser = function (id, replacement, token, callback) {
@@ -89,41 +92,41 @@ module.exports.getUserByUsername = function (username, callback) {
 // }
 
 module.exports.updateUserToken = function (id, replacement) {
-  console.log('updateUserToken')
+  console.log("updateUserToken");
   User.update({
     _id: id
   },
   {
-    '$set': {
+    "$set": {
       token: replacement
     }
   },
   {
-    'multi': true
+    "multi": true
   },
   function (err, doc) {
     if (err) {
-      handler(err)
+      handler(err);
     }
-  })
-}
+  });
+};
 
 module.exports.updateUserInfo = function (id, replacement, callback) {
-  User.findOneAndUpdate({_id: id}, {$set: {address: replacement.address, name: replacement.name}}, callback)
-}
+  User.findOneAndUpdate({_id: id}, {$set: {address: replacement.address, name: replacement.name}}, callback);
+};
 
 module.exports.getUserByEmail = function (email, callback) {
-  var query = {email: email}
-  User.findOne(query, callback)
-}
+  var query = {email: email};
+  User.findOne(query, callback);
+};
 
 module.exports.getUserById = function (id, callback) {
-  User.findById(id, callback)
-}
+  User.findById(id, callback);
+};
 
 module.exports.comparePassword = function (pass, hash, callback) {
   bcrypt.compare(pass, hash, function (err, isMatch) {
-    if (err) throw err
-    callback(null, isMatch)
-  })
-}
+    if (err) throw err;
+    callback(null, isMatch);
+  });
+};

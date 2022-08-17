@@ -7,8 +7,9 @@
           v-bind:key="tab.name"
           v-bind:class="['item', {'col2': $index % 2 === 0, 'col2d': $index % 2 !== 0 }]"
           v-on:click="currentTab = tab">
-          <MenuItem :tab="tab"/> 
+          <MenuItem :tab="tab"> 
             <img v-bind:src="tab.image"/>
+          </MenuItem>
         </div>
       </div>
     </div>
@@ -89,6 +90,10 @@
    tabs.push(setImages(img6, 'ficken'))
    tabs.push(setImages(img7, 'strips'))
    tabs.push(setImages(img8, 'grilledcheese'))
+
+  console.log("tabs");
+  console.log(tabs);
+  
 </script>
 
 <style lang="scss" scoped>

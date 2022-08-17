@@ -1,9 +1,9 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 // import utils from '@/scripts/common.js'
-import utils from './scripts/utils.js';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
+import utils from "./scripts/utils.js";
+import axios from "axios";
+import VueAxios from "vue-axios";
 
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
@@ -68,26 +68,26 @@ export default new Vuex.Store({
     changeValue: state => {
       state.cart.content.forEach(item => {
         item.num = item.num + 15;
-      })
+      });
     },
     updateAllPrices: (state, items) => {
       state.menu.items = items;
-      state.selected = utils.switchSelectedTab(state.selected, 'menu');
+      state.selected = utils.switchSelectedTab(state.selected, "menu");
     },
     updateSpecials: (state, items) => {
-      state.selected = utils.switchSelectedTab(state.selected, 'menu');
+      state.selected = utils.switchSelectedTab(state.selected, "menu");
       state.specials = items;
     }
   },
   actions: {
     setMainView: (context, payload) => {
-      context.commit('setMainView', payload);
+      context.commit("setMainView", payload);
     },
     emptyCart: (context, payload) => {
-      context.commit('emptyCart', payload);
+      context.commit("emptyCart", payload);
     },
     updateAddress: (context, payload) => {
-      context.commit('emptyCart', payload);
+      context.commit("emptyCart", payload);
     },
     // setMainView: (context, payload) => {
     //   context.commit('setMainView', payload)
@@ -99,71 +99,71 @@ export default new Vuex.Store({
     //   context.commit('setMainView', payload)
     // },
     getMapData: (context, payload) => {
-      return Vue.axios.get('/getmap')
+      return Vue.axios.get("/getmap")
         .then(function (response) {
-          console.log('getMap');
+          console.log("getMap");
           console.log(response.data);
-          context.commit('setupMap', payload);
+          context.commit("setupMap", payload);
         });
     },
     updateAccountInfo: (context, payload) => {
-      console.log('confirm update');
+      console.log("confirm update");
       console.log(payload);
-      return Vue.axios.get('users/update', payload)
+      return Vue.axios.get("users/update", payload)
         .then(function (response) {
           console.log(response.data);
-          context.commit('confirmInfoUpdate', response.data);
+          context.commit("confirmInfoUpdate", response.data);
         });
     },
     retrieveMenu: (context, payload) => {
-      return Vue.axios.get('/menu')
+      return Vue.axios.get("/menu")
         .then(function (response) {
           console.log(response.data);
-          console.log('retrieveMenu');
-          context.commit('updateSpecials', payload);
+          console.log("retrieveMenu");
+          context.commit("updateSpecials", payload);
         });
     },
     getPastOrders: (context, payload) => {
-      return Vue.axios.get('users/pastorders', {headers: utils.getAuthToken()})
+      return Vue.axios.get("users/pastorders", {headers: utils.getAuthToken()})
         .then(function (response) {
           console.log(response.data);
-          console.log('getPastOrders');
-          context.commit('updateSpecials', payload);
+          console.log("getPastOrders");
+          context.commit("updateSpecials", payload);
         });
     },
     retrievePopularOrders: (context, payload) => {
-      return Vue.axios.get('/popular')
+      return Vue.axios.get("/popular")
         .then(function (response) {
           console.log(response.data);
-          console.log('retrievePopularOrders');
-          context.commit('updateSpecials', payload);
+          console.log("retrievePopularOrders");
+          context.commit("updateSpecials", payload);
         });
     },
     retrievePopularMenu: (context) => {
-      return Vue.axios.get('/menu/popular')
+      return Vue.axios.get("/menu/popular")
         .then(function (response) {
           console.log(response.data);
           // context.commit('updateAllPrices', response.data)
         });
     },
     retrieveMainMenu: (context) => {
-      return Vue.axios.get('/menu/all')
+      return Vue.axios.get("/menu/all")
         .then(function (response) {
-          console.log('retrieveMainMenu');
+          console.log("retrieveMainMenu");
           console.log(response.data);
-          context.commit('updateAllPrices', response.data);
+          context.commit("updateAllPrices", response.data);
         });
     },
     retrieveSpeciallist: (context, payload) => {
-      return Vue.axios.get('menu/specials')
+      return Vue.axios.get("menu/specials")
         .then(function (response) {
-          console.log('retrieveSpeciallist');
+          console.log("retrieveSpeciallist");
           console.log(response.data);
           // context.commit('')
         });
     },
     removeFromCart: (context, payload) => {
-      context.commit('removeItem', payload);
+      context.commit("removeItem", payload);
     },
   },
 });
